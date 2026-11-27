@@ -78,13 +78,14 @@ export function renderSite({ meta, index, sections }, template) {
   const values = {
     TITLE: escapeHtml(meta.title),
     TAGLINE: escapeHtml(meta.tagline),
-    PAGE_TITLE: escapeHtml(`${meta.title} · ${meta.tagline}`),
+    PAGE_TITLE: escapeHtml(`${meta.title} · AI 工具与资源清单`),
     DESCRIPTION: escapeHtml(meta.description),
     CANONICAL: escapeHtml(siteUrl(meta)),
     REPO_URL: escapeHtml(`https://github.com/${meta.repo}`),
     REPO: escapeHtml(meta.repo),
     LICENSE: escapeHtml(meta.license),
     COUNT: String(total),
+    SECTION_COUNT: String(entries.length),
     NAV: entries
       .map((section) => `<a href="#${section.anchor}">${escapeHtml(section.title)}</a>`)
       .join(""),

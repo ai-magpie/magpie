@@ -41,7 +41,7 @@ test("渲染完整页面并替换全部占位符", () => {
   const html = renderSite(project, template);
 
   assert.ok(html.startsWith("<!doctype html>"));
-  assert.ok(html.includes("<title>Magpie · 一句话。</title>"));
+  assert.ok(html.includes("<title>Magpie · AI 工具与资源清单</title>"));
   assert.ok(html.includes('name="description" content="开篇说明。"'));
   assert.ok(html.includes('rel="canonical" href="https://example.github.io/magpie/"'));
   assert.ok(html.includes('id="工具"'));
