@@ -1,0 +1,57 @@
+{
+  "id": "productivity",
+  "title": "办公与通用 Agent",
+  "description": "面向日常工作的 AI 产品，以及可自主执行多步任务的通用 Agent。",
+  "items": [
+    {
+      "name": "NotebookLM",
+      "url": "https://notebooklm.google.com/",
+      "description": "基于资料的 AI 笔记与研究助手，可生成摘要、问答与音频概览。"
+    },
+    {
+      "name": "Notion AI",
+      "url": "https://www.notion.com/product/ai",
+      "description": "Notion 内置的 AI 写作、检索与数据库助手。"
+    },
+    {
+      "name": "Gamma",
+      "url": "https://gamma.app/",
+      "description": "用提示词生成演示文稿、文档与网页，支持模板与品牌样式。"
+    },
+    {
+      "name": "Canva",
+      "url": "https://www.canva.com/",
+      "description": "在线设计平台，内置文生图、抠图与版式生成等 AI 能力。"
+    },
+    {
+      "name": "Manus",
+      "url": "https://manus.im/",
+      "description": "通用 Agent 产品，可分解任务并调用工具完成多步工作。"
+    },
+    {
+      "name": "Genspark",
+      "url": "https://www.genspark.ai/",
+      "description": "通用 Agent 与搜索产品，可生成报告、幻灯片与网页。"
+    },
+    {
+      "name": "Granola",
+      "url": "https://www.granola.ai/",
+      "description": "面向会议的 AI 笔记工具，结合本地音频与手写笔记生成纪要。"
+    },
+    {
+      "name": "Otter",
+      "url": "https://otter.ai/",
+      "description": "会议转写与纪要工具，支持实时字幕与行动项提取。"
+    },
+    {
+      "name": "Microsoft 365 Copilot",
+      "url": "https://www.microsoft.com/en-us/microsoft-365/copilot",
+      "description": "Office 应用与 Teams 中的 AI 助手，覆盖文档、邮件与会议。"
+    },
+    {
+      "name": "Google Workspace Gemini",
+      "url": "https://workspace.google.com/solutions/ai/",
+      "description": "Gmail、Docs、Meet 等 Workspace 应用中的 Gemini 助手。"
+    }
+  ]
+}

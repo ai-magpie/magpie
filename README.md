@@ -24,6 +24,8 @@ Magpie 是一份人工策展的 AI 工具清单，关注能真正进入工作流
 - [MCP 生态](#mcp-生态)
 - [AI 搜索](#ai-搜索)
 - [知识库与 RAG](#知识库与-rag)
+- [办公与通用 Agent](#办公与通用-agent)
+- [学习资源](#学习资源)
 - [模型目录与榜单](#模型目录与榜单)
 
 ## 大模型
@@ -240,6 +242,32 @@ Model Context Protocol 的规范、注册表、目录与开发工具；不逐个
 - [R2R](https://github.com/SciPhi-AI/R2R) — 开源的 RAG 引擎与 API，支持多模态文档与 Agent 检索。
 - [Qdrant](https://qdrant.tech/) — 开源向量数据库，支持过滤、混合检索与分布式部署。
 - [Unstructured](https://unstructured.io/) — 文档解析与切分工具，把 PDF、HTML 等转成结构化数据。
+
+## 办公与通用 Agent
+
+面向日常工作的 AI 产品，以及可自主执行多步任务的通用 Agent。
+
+- [NotebookLM](https://notebooklm.google.com/) — 基于资料的 AI 笔记与研究助手，可生成摘要、问答与音频概览。
+- [Notion AI](https://www.notion.com/product/ai) — Notion 内置的 AI 写作、检索与数据库助手。
+- [Gamma](https://gamma.app/) — 用提示词生成演示文稿、文档与网页，支持模板与品牌样式。
+- [Canva](https://www.canva.com/) — 在线设计平台，内置文生图、抠图与版式生成等 AI 能力。
+- [Manus](https://manus.im/) — 通用 Agent 产品，可分解任务并调用工具完成多步工作。
+- [Genspark](https://www.genspark.ai/) — 通用 Agent 与搜索产品，可生成报告、幻灯片与网页。
+- [Granola](https://www.granola.ai/) — 面向会议的 AI 笔记工具，结合本地音频与手写笔记生成纪要。
+- [Otter](https://otter.ai/) — 会议转写与纪要工具，支持实时字幕与行动项提取。
+- [Microsoft 365 Copilot](https://www.microsoft.com/en-us/microsoft-365/copilot) — Office 应用与 Teams 中的 AI 助手，覆盖文档、邮件与会议。
+- [Google Workspace Gemini](https://workspace.google.com/solutions/ai/) — Gmail、Docs、Meet 等 Workspace 应用中的 Gemini 助手。
+
+## 学习资源
+
+系统学习大模型与 Agent 的课程、论文与通讯，偏长期价值而非工具。
+
+- [DeepLearning.AI](https://www.deeplearning.ai/) — 吴恩达团队的 AI 课程平台，覆盖 LLM、Agent 与工程实践。
+- [Hugging Face Learn](https://huggingface.co/learn) — Hugging Face 的免费课程与教程，覆盖 NLP、Agent 与模型部署。
+- [fast.ai](https://www.fast.ai/) — 面向实践者的免费深度学习课程，强调自顶向下学习。
+- [Karpathy Zero to Hero](https://karpathy.ai/zero-to-hero.html) — 从零实现语言模型的系列课程，适合理解 LLM 原理。
+- [arXiv](https://arxiv.org/) — 预印本论文库，cs.CL 与 cs.AI 是追踪模型进展的主要来源。
+- [Latent Space](https://www.latent.space/) — 面向 AI 工程师的播客与通讯，关注工程实践与产品落地。
 
 ## 模型目录与榜单
 

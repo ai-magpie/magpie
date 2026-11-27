@@ -1,0 +1,37 @@
+{
+  "id": "learning",
+  "title": "学习资源",
+  "description": "系统学习大模型与 Agent 的课程、论文与通讯，偏长期价值而非工具。",
+  "items": [
+    {
+      "name": "DeepLearning.AI",
+      "url": "https://www.deeplearning.ai/",
+      "description": "吴恩达团队的 AI 课程平台，覆盖 LLM、Agent 与工程实践。"
+    },
+    {
+      "name": "Hugging Face Learn",
+      "url": "https://huggingface.co/learn",
+      "description": "Hugging Face 的免费课程与教程，覆盖 NLP、Agent 与模型部署。"
+    },
+    {
+      "name": "fast.ai",
+      "url": "https://www.fast.ai/",
+      "description": "面向实践者的免费深度学习课程，强调自顶向下学习。"
+    },
+    {
+      "name": "Karpathy Zero to Hero",
+      "url": "https://karpathy.ai/zero-to-hero.html",
+      "description": "从零实现语言模型的系列课程，适合理解 LLM 原理。"
+    },
+    {
+      "name": "arXiv",
+      "url": "https://arxiv.org/",
+      "description": "预印本论文库，cs.CL 与 cs.AI 是追踪模型进展的主要来源。"
+    },
+    {
+      "name": "Latent Space",
+      "url": "https://www.latent.space/",
+      "description": "面向 AI 工程师的播客与通讯，关注工程实践与产品落地。"
+    }
+  ]
+}
