@@ -1,0 +1,67 @@
+{
+  "id": "image-models",
+  "title": "图像生成模型",
+  "description": "文生图与图像编辑模型，覆盖闭源产品与开源权重的代表家族。",
+  "items": [
+    {
+      "name": "Midjourney",
+      "url": "https://www.midjourney.com/",
+      "description": "以审美风格著称的文生图产品，支持参考图与风格控制。"
+    },
+    {
+      "name": "ChatGPT Images",
+      "url": "https://platform.openai.com/docs/guides/image-generation",
+      "description": "OpenAI 的图像生成产品，API 侧以 GPT Image 提供，擅长文字渲染与指令遵循。"
+    },
+    {
+      "name": "Gemini Image",
+      "url": "https://deepmind.google/models/gemini-image/",
+      "description": "Google 的 Gemini 图像模型，Nano Banana 系列以多轮编辑与角色一致性见长。"
+    },
+    {
+      "name": "ByteDance Seedream",
+      "url": "https://seed.bytedance.com/en/seedream",
+      "description": "字节跳动的图像生成模型，支持文字渲染、多图参考与批量生成。"
+    },
+    {
+      "name": "Recraft",
+      "url": "https://www.recraft.ai/",
+      "description": "面向品牌与矢量图形的生成工具，擅长图标、插画与一致风格。"
+    },
+    {
+      "name": "Ideogram",
+      "url": "https://ideogram.ai/",
+      "description": "以文字排版和海报生成为特色的图像模型。"
+    },
+    {
+      "name": "Adobe Firefly",
+      "url": "https://www.adobe.com/products/firefly.html",
+      "description": "集成在 Adobe 创意工具中的生成模型，强调商用授权与素材工作流。"
+    },
+    {
+      "name": "Krea",
+      "url": "https://www.krea.ai/",
+      "description": "面向创作者的实时生成与放大工具，支持风格参考与局部编辑。"
+    },
+    {
+      "name": "FLUX",
+      "url": "https://bfl.ai/",
+      "description": "Black Forest Labs 的图像模型家族，开源权重与托管 API 并行。"
+    },
+    {
+      "name": "Stable Diffusion",
+      "url": "https://stability.ai/",
+      "description": "Stability AI 的开源权重图像模型，社区微调与工具链成熟。"
+    },
+    {
+      "name": "Qwen-Image",
+      "url": "https://github.com/QwenLM/Qwen-Image",
+      "description": "阿里通义的开源图像模型，中文文字渲染与图像编辑见长。"
+    },
+    {
+      "name": "HunyuanImage",
+      "url": "https://github.com/Tencent-Hunyuan/HunyuanImage-3.0",
+      "description": "腾讯的开源图像生成模型，支持中英文提示词与高质量出图。"
+    }
+  ]
+}

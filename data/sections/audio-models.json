@@ -1,0 +1,67 @@
+{
+  "id": "audio-models",
+  "title": "语音与音乐",
+  "description": "语音合成、语音识别与音乐生成模型，兼顾实时 API 与可自部署方案。",
+  "items": [
+    {
+      "name": "ElevenLabs",
+      "url": "https://elevenlabs.io/",
+      "description": "语音合成与克隆平台，支持多语言、情感控制与实时流式输出。"
+    },
+    {
+      "name": "Cartesia",
+      "url": "https://cartesia.ai/",
+      "description": "低延迟语音合成模型，面向实时对话与语音 Agent。"
+    },
+    {
+      "name": "Deepgram",
+      "url": "https://deepgram.com/",
+      "description": "语音识别与合成 API，主打低延迟与电话场景。"
+    },
+    {
+      "name": "Inworld TTS",
+      "url": "https://inworld.ai/tts",
+      "description": "面向游戏与角色对话的语音合成，强调情感与表演控制。"
+    },
+    {
+      "name": "MiniMax Audio",
+      "url": "https://www.minimax.io/audio",
+      "description": "语音合成与克隆服务，支持多语言与长文本。"
+    },
+    {
+      "name": "Fish Audio",
+      "url": "https://fish.audio/",
+      "description": "开源语音合成模型与托管服务，支持声音克隆。"
+    },
+    {
+      "name": "OpenAI Audio",
+      "url": "https://platform.openai.com/docs/guides/speech-to-text",
+      "description": "OpenAI 的语音合成与识别接口，覆盖实时对话与转写。"
+    },
+    {
+      "name": "Whisper",
+      "url": "https://github.com/openai/whisper",
+      "description": "OpenAI 开源的语音识别模型，可本地部署与微调。"
+    },
+    {
+      "name": "Suno",
+      "url": "https://suno.com/",
+      "description": "文生音乐平台，可生成含人声与编曲的完整歌曲。"
+    },
+    {
+      "name": "Udio",
+      "url": "https://www.udio.com/",
+      "description": "文生音乐平台，强调编曲质量与分段续写。"
+    },
+    {
+      "name": "Stable Audio",
+      "url": "https://stableaudio.com/",
+      "description": "Stability AI 的音频生成模型，支持音效与音乐片段。"
+    },
+    {
+      "name": "Lyria",
+      "url": "https://deepmind.google/models/lyria/",
+      "description": "Google 的音乐生成模型家族，面向配乐与音效生成。"
+    }
+  ]
+}

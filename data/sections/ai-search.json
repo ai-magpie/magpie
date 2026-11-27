@@ -1,0 +1,47 @@
+{
+  "id": "ai-search",
+  "title": "AI 搜索",
+  "description": "面向 AI 应用的搜索与抓取 API，以及带引用的答案引擎。",
+  "items": [
+    {
+      "name": "Perplexity",
+      "url": "https://www.perplexity.ai/",
+      "description": "带引用的 AI 搜索与答案引擎，提供消费级产品与 API。"
+    },
+    {
+      "name": "Exa",
+      "url": "https://exa.ai/",
+      "description": "面向 AI 的语义搜索 API，支持按内容与链接检索。"
+    },
+    {
+      "name": "Tavily",
+      "url": "https://tavily.com/",
+      "description": "为 Agent 设计的搜索 API，返回可直接使用的结果摘要。"
+    },
+    {
+      "name": "Brave Search API",
+      "url": "https://brave.com/search/api/",
+      "description": "独立索引的搜索 API，适合替代通用搜索引擎接口。"
+    },
+    {
+      "name": "Jina AI",
+      "url": "https://jina.ai/",
+      "description": "网页读取、搜索与向量化工具，常用于 RAG 数据准备。"
+    },
+    {
+      "name": "Firecrawl",
+      "url": "https://www.firecrawl.dev/",
+      "description": "把网页抓取并转换为 Markdown 的 API，适合喂给 LLM。"
+    },
+    {
+      "name": "Kagi",
+      "url": "https://kagi.com/",
+      "description": "付费无广告搜索引擎，提供 API 与可定制结果。"
+    },
+    {
+      "name": "Context7",
+      "url": "https://context7.com/",
+      "description": "为编程助手提供最新文档与代码示例的检索服务。"
+    }
+  ]
+}

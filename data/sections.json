@@ -2,6 +2,9 @@
   "sections": [
     "llm",
     "video-models",
+    "image-models",
+    "audio-models",
+    "3d-models",
     "model-platforms",
     "local-inference",
     "coding-agents",
@@ -9,6 +12,8 @@
     "agent-frameworks",
     "skills",
     "mcp",
+    "ai-search",
+    "knowledge-base",
     "model-catalogs"
   ]
 }

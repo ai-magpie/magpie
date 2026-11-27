@@ -1,0 +1,47 @@
+{
+  "id": "3d-models",
+  "title": "3D 与数字人",
+  "description": "从文本或图片生成 3D 资产，以及数字人视频；含开源权重方案。",
+  "items": [
+    {
+      "name": "Meshy",
+      "url": "https://www.meshy.ai/",
+      "description": "文本/图片生成 3D 模型，覆盖游戏资产与 3D 打印。"
+    },
+    {
+      "name": "Hyper3D Rodin",
+      "url": "https://hyper3d.ai/",
+      "description": "高质量 3D 资产生成，支持文本与图片输入。"
+    },
+    {
+      "name": "腾讯 Hunyuan3D",
+      "url": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1",
+      "description": "腾讯的开源 3D 生成模型，支持纹理与几何生成。"
+    },
+    {
+      "name": "TRELLIS",
+      "url": "https://github.com/microsoft/TRELLIS.2",
+      "description": "微软的开源 3D 生成模型，从图片重建带纹理的资产。"
+    },
+    {
+      "name": "Tripo",
+      "url": "https://www.tripo3d.ai/",
+      "description": "面向游戏与电商的 3D 资产生成，支持文本与图片输入。"
+    },
+    {
+      "name": "Stable Fast 3D",
+      "url": "https://github.com/Stability-AI/stable-fast-3d",
+      "description": "Stability AI 的开源图生 3D 模型，强调生成速度。"
+    },
+    {
+      "name": "HeyGen",
+      "url": "https://www.heygen.com/",
+      "description": "数字人视频平台，支持形象克隆、口型同步与多语言配音。"
+    },
+    {
+      "name": "Synthesia",
+      "url": "https://www.synthesia.io/",
+      "description": "企业级数字人视频平台，主打培训与营销场景。"
+    }
+  ]
+}

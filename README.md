@@ -12,6 +12,9 @@ Magpie 是一份人工策展的 AI 工具清单，关注能真正进入工作流
 
 - [大模型](#大模型)
 - [视频生成模型](#视频生成模型)
+- [图像生成模型](#图像生成模型)
+- [语音与音乐](#语音与音乐)
+- [3D 与数字人](#3d-与数字人)
 - [模型平台](#模型平台)
 - [本地模型与推理](#本地模型与推理)
 - [编程 Agent](#编程-agent)
@@ -19,6 +22,8 @@ Magpie 是一份人工策展的 AI 工具清单，关注能真正进入工作流
 - [Agent 开发框架](#agent-开发框架)
 - [Agent Skills](#agent-skills)
 - [MCP 生态](#mcp-生态)
+- [AI 搜索](#ai-搜索)
+- [知识库与 RAG](#知识库与-rag)
 - [模型目录与榜单](#模型目录与榜单)
 
 ## 大模型
@@ -54,6 +59,53 @@ Magpie 是一份人工策展的 AI 工具清单，关注能真正进入工作流
 - [Lightricks LTX](https://ltx.studio/) — 开源权重视频模型，支持较快生成与本地部署。
 - [腾讯 HunyuanVideo](https://github.com/Tencent-Hunyuan/HunyuanVideo) — 开源权重视频生成模型，支持本地推理与二次开发。
 - [Genmo Mochi](https://github.com/genmoai/mochi) — 开源权重视频模型，适合研究与自部署实验。
+
+## 图像生成模型
+
+文生图与图像编辑模型，覆盖闭源产品与开源权重的代表家族。
+
+- [Midjourney](https://www.midjourney.com/) — 以审美风格著称的文生图产品，支持参考图与风格控制。
+- [ChatGPT Images](https://platform.openai.com/docs/guides/image-generation) — OpenAI 的图像生成产品，API 侧以 GPT Image 提供，擅长文字渲染与指令遵循。
+- [Gemini Image](https://deepmind.google/models/gemini-image/) — Google 的 Gemini 图像模型，Nano Banana 系列以多轮编辑与角色一致性见长。
+- [ByteDance Seedream](https://seed.bytedance.com/en/seedream) — 字节跳动的图像生成模型，支持文字渲染、多图参考与批量生成。
+- [Recraft](https://www.recraft.ai/) — 面向品牌与矢量图形的生成工具，擅长图标、插画与一致风格。
+- [Ideogram](https://ideogram.ai/) — 以文字排版和海报生成为特色的图像模型。
+- [Adobe Firefly](https://www.adobe.com/products/firefly.html) — 集成在 Adobe 创意工具中的生成模型，强调商用授权与素材工作流。
+- [Krea](https://www.krea.ai/) — 面向创作者的实时生成与放大工具，支持风格参考与局部编辑。
+- [FLUX](https://bfl.ai/) — Black Forest Labs 的图像模型家族，开源权重与托管 API 并行。
+- [Stable Diffusion](https://stability.ai/) — Stability AI 的开源权重图像模型，社区微调与工具链成熟。
+- [Qwen-Image](https://github.com/QwenLM/Qwen-Image) — 阿里通义的开源图像模型，中文文字渲染与图像编辑见长。
+- [HunyuanImage](https://github.com/Tencent-Hunyuan/HunyuanImage-3.0) — 腾讯的开源图像生成模型，支持中英文提示词与高质量出图。
+
+## 语音与音乐
+
+语音合成、语音识别与音乐生成模型，兼顾实时 API 与可自部署方案。
+
+- [ElevenLabs](https://elevenlabs.io/) — 语音合成与克隆平台，支持多语言、情感控制与实时流式输出。
+- [Cartesia](https://cartesia.ai/) — 低延迟语音合成模型，面向实时对话与语音 Agent。
+- [Deepgram](https://deepgram.com/) — 语音识别与合成 API，主打低延迟与电话场景。
+- [Inworld TTS](https://inworld.ai/tts) — 面向游戏与角色对话的语音合成，强调情感与表演控制。
+- [MiniMax Audio](https://www.minimax.io/audio) — 语音合成与克隆服务，支持多语言与长文本。
+- [Fish Audio](https://fish.audio/) — 开源语音合成模型与托管服务，支持声音克隆。
+- [OpenAI Audio](https://platform.openai.com/docs/guides/speech-to-text) — OpenAI 的语音合成与识别接口，覆盖实时对话与转写。
+- [Whisper](https://github.com/openai/whisper) — OpenAI 开源的语音识别模型，可本地部署与微调。
+- [Suno](https://suno.com/) — 文生音乐平台，可生成含人声与编曲的完整歌曲。
+- [Udio](https://www.udio.com/) — 文生音乐平台，强调编曲质量与分段续写。
+- [Stable Audio](https://stableaudio.com/) — Stability AI 的音频生成模型，支持音效与音乐片段。
+- [Lyria](https://deepmind.google/models/lyria/) — Google 的音乐生成模型家族，面向配乐与音效生成。
+
+## 3D 与数字人
+
+从文本或图片生成 3D 资产，以及数字人视频；含开源权重方案。
+
+- [Meshy](https://www.meshy.ai/) — 文本/图片生成 3D 模型，覆盖游戏资产与 3D 打印。
+- [Hyper3D Rodin](https://hyper3d.ai/) — 高质量 3D 资产生成，支持文本与图片输入。
+- [腾讯 Hunyuan3D](https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1) — 腾讯的开源 3D 生成模型，支持纹理与几何生成。
+- [TRELLIS](https://github.com/microsoft/TRELLIS.2) — 微软的开源 3D 生成模型，从图片重建带纹理的资产。
+- [Tripo](https://www.tripo3d.ai/) — 面向游戏与电商的 3D 资产生成，支持文本与图片输入。
+- [Stable Fast 3D](https://github.com/Stability-AI/stable-fast-3d) — Stability AI 的开源图生 3D 模型，强调生成速度。
+- [HeyGen](https://www.heygen.com/) — 数字人视频平台，支持形象克隆、口型同步与多语言配音。
+- [Synthesia](https://www.synthesia.io/) — 企业级数字人视频平台，主打培训与营销场景。
 
 ## 模型平台
 
@@ -162,6 +214,32 @@ Model Context Protocol 的规范、注册表、目录与开发工具；不逐个
 - [FastMCP](https://github.com/jlowin/fastmcp) — 用 Python 快速编写 MCP Server 的框架。
 - [MCP Inspector](https://github.com/modelcontextprotocol/inspector) — 调试 MCP Server 的官方工具，可查看工具与消息。
 - [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) — 官方 TypeScript SDK，用于实现 Server 与 Client。
+
+## AI 搜索
+
+面向 AI 应用的搜索与抓取 API，以及带引用的答案引擎。
+
+- [Perplexity](https://www.perplexity.ai/) — 带引用的 AI 搜索与答案引擎，提供消费级产品与 API。
+- [Exa](https://exa.ai/) — 面向 AI 的语义搜索 API，支持按内容与链接检索。
+- [Tavily](https://tavily.com/) — 为 Agent 设计的搜索 API，返回可直接使用的结果摘要。
+- [Brave Search API](https://brave.com/search/api/) — 独立索引的搜索 API，适合替代通用搜索引擎接口。
+- [Jina AI](https://jina.ai/) — 网页读取、搜索与向量化工具，常用于 RAG 数据准备。
+- [Firecrawl](https://www.firecrawl.dev/) — 把网页抓取并转换为 Markdown 的 API，适合喂给 LLM。
+- [Kagi](https://kagi.com/) — 付费无广告搜索引擎，提供 API 与可定制结果。
+- [Context7](https://context7.com/) — 为编程助手提供最新文档与代码示例的检索服务。
+
+## 知识库与 RAG
+
+搭建知识库与 RAG 的工具链，从文档解析到检索与编排。
+
+- [Dify](https://dify.ai/) — 开源的低代码 Agent 与 RAG 平台，支持可视化工作流。
+- [RAGFlow](https://ragflow.io/) — 开源的 RAG 引擎，擅长复杂文档解析与检索。
+- [FastGPT](https://fastgpt.io/) — 轻量的知识库与 Agent 平台，部署简单、接口兼容 OpenAI。
+- [Haystack](https://haystack.deepset.ai/) — deepset 的 RAG 编排框架，支持检索、生成与评测。
+- [GraphRAG](https://github.com/microsoft/graphrag) — 微软的图谱增强检索方案，适合全局性问题的知识组织。
+- [R2R](https://github.com/SciPhi-AI/R2R) — 开源的 RAG 引擎与 API，支持多模态文档与 Agent 检索。
+- [Qdrant](https://qdrant.tech/) — 开源向量数据库，支持过滤、混合检索与分布式部署。
+- [Unstructured](https://unstructured.io/) — 文档解析与切分工具，把 PDF、HTML 等转成结构化数据。
 
 ## 模型目录与榜单
 

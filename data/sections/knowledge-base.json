@@ -1,0 +1,47 @@
+{
+  "id": "knowledge-base",
+  "title": "知识库与 RAG",
+  "description": "搭建知识库与 RAG 的工具链，从文档解析到检索与编排。",
+  "items": [
+    {
+      "name": "Dify",
+      "url": "https://dify.ai/",
+      "description": "开源的低代码 Agent 与 RAG 平台，支持可视化工作流。"
+    },
+    {
+      "name": "RAGFlow",
+      "url": "https://ragflow.io/",
+      "description": "开源的 RAG 引擎，擅长复杂文档解析与检索。"
+    },
+    {
+      "name": "FastGPT",
+      "url": "https://fastgpt.io/",
+      "description": "轻量的知识库与 Agent 平台，部署简单、接口兼容 OpenAI。"
+    },
+    {
+      "name": "Haystack",
+      "url": "https://haystack.deepset.ai/",
+      "description": "deepset 的 RAG 编排框架，支持检索、生成与评测。"
+    },
+    {
+      "name": "GraphRAG",
+      "url": "https://github.com/microsoft/graphrag",
+      "description": "微软的图谱增强检索方案，适合全局性问题的知识组织。"
+    },
+    {
+      "name": "R2R",
+      "url": "https://github.com/SciPhi-AI/R2R",
+      "description": "开源的 RAG 引擎与 API，支持多模态文档与 Agent 检索。"
+    },
+    {
+      "name": "Qdrant",
+      "url": "https://qdrant.tech/",
+      "description": "开源向量数据库，支持过滤、混合检索与分布式部署。"
+    },
+    {
+      "name": "Unstructured",
+      "url": "https://unstructured.io/",
+      "description": "文档解析与切分工具，把 PDF、HTML 等转成结构化数据。"
+    }
+  ]
+}
