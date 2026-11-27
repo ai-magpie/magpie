@@ -1,16 +1,16 @@
-import { createSlugger } from './slug.mjs';
+import { orderedSections } from "./order.mjs";
 
 const GENERATED_NOTE =
-  '<!-- 本文件由 scripts/build.mjs 从 data/ 自动生成，请勿直接编辑；修改 data/ 后运行 `pnpm build`。 -->';
+  "<!-- 本文件由 scripts/build.mjs 从 data/ 自动生成，请勿直接编辑；修改 data/ 后运行 `npm run build`。 -->";
 
-const EMPTY_SECTION = '_暂无收录，欢迎提交 PR。_';
+const EMPTY_SECTION = "_暂无收录，欢迎提交 PR。_";
 
 /**
  * @param {string} text
  * @returns {string}
  */
 function escapeText(text) {
-  return text.replace(/[\\[\]]/g, '\\$&');
+  return text.replace(/[\\[\]]/g, "\\$&");
 }
 
 /**
@@ -18,7 +18,7 @@ function escapeText(text) {
  * @returns {string}
  */
 function escapeUrl(url) {
-  return url.replace(/\(/g, '%28').replace(/\)/g, '%29');
+  return url.replace(/\(/g, "%28").replace(/\)/g, "%29");
 }
 
 /**
@@ -26,9 +26,9 @@ function escapeUrl(url) {
  * @returns {string}
  */
 function renderSection(section) {
-  const lines = [`## ${section.title}`, '', section.description];
-  if (section.intro) lines.push('', section.intro);
-  lines.push('');
+  const lines = [`## ${section.title}`, "", section.description];
+  if (section.intro) lines.push("", section.intro);
+  lines.push("");
 
   if (!Array.isArray(section.items) || section.items.length === 0) {
     lines.push(EMPTY_SECTION);
@@ -37,7 +37,7 @@ function renderSection(section) {
       lines.push(`- [${escapeText(item.name)}](${escapeUrl(item.url)}) — ${item.description}`);
     }
   }
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 /**
@@ -46,42 +46,37 @@ function renderSection(section) {
  * @returns {string}
  */
 export function renderReadme({ meta, index, sections }) {
-  const slug = createSlugger();
-  const order = Array.isArray(index?.sections) ? index.sections : [];
-  const entries = order
-    .filter((id) => sections.has(id))
-    .map((id) => {
-      const section = sections.get(id);
-      return { ...section, anchor: slug(section.title) };
-    });
+  const entries = orderedSections({ index, sections });
 
   /** @type {string[]} */
   const blocks = [GENERATED_NOTE, `# ${meta.title}`, `> ${meta.tagline}`];
   if (meta.site) blocks.push(`**[在线浏览](${escapeUrl(meta.site)})**`);
   if (meta.description) blocks.push(meta.description);
 
-  const toc = ['## 目录', ''];
+  const toc = ["## 目录", ""];
   if (entries.length === 0) {
-    toc.push('_暂无章节。_');
+    toc.push("_暂无章节。_");
   } else {
     for (const entry of entries) toc.push(`- [${entry.title}](#${entry.anchor})`);
   }
-  blocks.push(toc.join('\n'));
+  blocks.push(toc.join("\n"));
 
   for (const entry of entries) blocks.push(renderSection(entry));
 
   blocks.push(
     [
-      '## 贡献',
-      '',
+      "## 贡献",
+      "",
       meta.contributing,
-      '',
-      '编辑 `data/sections/` 下的 JSON 文件后运行 `pnpm build` 重新生成 README，不要直接修改本文件。',
-      '',
-      '提交前可运行 `pnpm check:links` 抽查外链，失效链接请替换或移除。',
-    ].join('\n'),
+      "",
+      "编辑 `data/sections/` 下的 JSON 文件后运行 `npm run build` 重新生成 README，不要直接修改本文件。",
+      "",
+      "提交前可运行 `npm run check:links` 抽查外链，失效链接请替换或移除。"
+    ].join("\n")
   );
-  blocks.push(['## 许可', '', `[${meta.license}](LICENSE) © ${String(meta.repo).split('/')[0]}`].join('\n'));
+  blocks.push(
+    ["## 许可", "", `[${meta.license}](LICENSE) © ${String(meta.repo).split("/")[0]}`].join("\n")
+  );
 
-  return `${blocks.join('\n\n')}\n`;
+  return `${blocks.join("\n\n")}\n`;
 }

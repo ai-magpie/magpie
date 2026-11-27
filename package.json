@@ -6,7 +6,7 @@
   "type": "module",
   "license": "MIT",
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -14,7 +14,13 @@
     "preview": "node scripts/build-site.mjs && node scripts/serve.mjs",
     "validate": "node scripts/validate.mjs",
     "check": "node scripts/validate.mjs && node scripts/build.mjs --check",
+    "check:all": "prettier --check . && node scripts/validate.mjs && node scripts/build.mjs --check && node scripts/build-site.mjs && node --test",
     "check:links": "node scripts/check-links.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.10.1"
   }
 }

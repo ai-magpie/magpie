@@ -5,5 +5,5 @@
   "repo": "ai-magpie/magpie",
   "site": "https://ai-magpie.github.io/magpie/",
   "license": "MIT",
-  "contributing": "发现遗漏或失效的条目，欢迎提交 PR。请保持一节一条、按主题归类，并附上一句话说明它解决什么问题。"
+  "contributing": "发现遗漏或失效的条目，欢迎提交 PR。请保持一节一条、按主题归类，并附上一句话说明它解决什么问题。提交前运行 `npm run format` 统一格式。"
 }

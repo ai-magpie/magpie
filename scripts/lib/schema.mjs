@@ -3,12 +3,14 @@
  */
 
 const ID_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
-const META_FIELDS = ['title', 'tagline', 'description', 'repo', 'license', 'contributing'];
+const META_FIELDS = ["title", "tagline", "description", "repo", "license", "contributing"];
+const SECTION_FIELDS = ["id", "title", "description", "intro", "items"];
+const ITEM_FIELDS = ["name", "url", "description"];
 const MAX_ITEM_NAME = 60;
 const MAX_ITEM_DESCRIPTION = 160;
 
-const isObject = (value) => typeof value === 'object' && value !== null && !Array.isArray(value);
-const isText = (value) => typeof value === 'string' && value.trim() !== '';
+const isObject = (value) => typeof value === "object" && value !== null && !Array.isArray(value);
+const isText = (value) => typeof value === "string" && value.trim() !== "";
 
 /**
  * 归一化 URL，用于判重：忽略协议大小写、末尾斜杠与 fragment。
@@ -23,9 +25,9 @@ export function normalizeUrl(raw) {
   } catch {
     return null;
   }
-  if (url.protocol !== 'https:' || url.username || url.password) return null;
+  if (url.protocol !== "https:" || url.username || url.password) return null;
 
-  const path = url.pathname.replace(/\/+$/, '') || '/';
+  const path = url.pathname.replace(/\/+$/, "") || "/";
   return `${url.protocol}//${url.host.toLowerCase()}${path}${url.search}`;
 }
 
@@ -46,7 +48,7 @@ export function validateData({ meta, index, files, sections }) {
   const warnings = [];
 
   if (!isObject(meta)) {
-    errors.push('data/meta.json 必须是一个 JSON 对象');
+    errors.push("data/meta.json 必须是一个 JSON 对象");
   } else {
     for (const field of META_FIELDS) {
       if (!isText(meta[field])) errors.push(`data/meta.json 缺少非空字段 "${field}"`);
@@ -68,7 +70,9 @@ export function validateData({ meta, index, files, sections }) {
   const ids = new Set();
   order.forEach((id, position) => {
     if (!isText(id) || !ID_PATTERN.test(id)) {
-      errors.push(`data/sections.json 第 ${position + 1} 项不是合法 id（小写字母、数字、连字符）：${JSON.stringify(id)}`);
+      errors.push(
+        `data/sections.json 第 ${position + 1} 项不是合法 id（小写字母、数字、连字符）：${JSON.stringify(id)}`
+      );
       return;
     }
     if (ids.has(id)) errors.push(`data/sections.json 重复引用 id "${id}"`);
@@ -119,6 +123,12 @@ export function validateData({ meta, index, files, sections }) {
       warnings.push(`${at} 的 "intro" 应为非空字符串，已忽略`);
     }
 
+    for (const key of Object.keys(section)) {
+      if (!SECTION_FIELDS.includes(key)) {
+        warnings.push(`${at} 含未被识别的字段 "${key}"，将被忽略`);
+      }
+    }
+
     if (!Array.isArray(section.items)) {
       errors.push(`${at} 的 "items" 必须是数组`);
       continue;
@@ -131,8 +141,13 @@ export function validateData({ meta, index, files, sections }) {
         errors.push(`${where} 必须是对象`);
         return;
       }
-      for (const field of ['name', 'url', 'description']) {
+      for (const field of ITEM_FIELDS) {
         if (!isText(item[field])) errors.push(`${where} 缺少非空字段 "${field}"`);
+      }
+      for (const key of Object.keys(item)) {
+        if (!ITEM_FIELDS.includes(key)) {
+          warnings.push(`${where} 含未被识别的字段 "${key}"，将被忽略`);
+        }
       }
       if (isText(item.name) && item.name.length > MAX_ITEM_NAME) {
         warnings.push(`${where} 名称超过 ${MAX_ITEM_NAME} 字符`);
@@ -159,12 +174,30 @@ export function validateData({ meta, index, files, sections }) {
 }
 
 /**
+ * 校验并打印报告；有错误时打印并以非零码退出进程。
+ * 供各入口脚本（build / build-site）复用，保证提示一致。
+ * @param {import('./io.mjs').Project} project
+ * @param {string} what 未通过时中止生成的产物名，如 "README"
+ * @returns {void}
+ */
+export function validateOrExit(project, what) {
+  const report = validateData(project);
+
+  if (report.errors.length > 0) {
+    console.error(formatReport(report));
+    console.error(`\n✗ 数据校验失败：${report.errors.length} 个错误，未生成${what}。`);
+    process.exit(1);
+  }
+  if (report.warnings.length > 0) console.warn(formatReport(report));
+}
+
+/**
  * @param {Report} report
  * @returns {string}
  */
 export function formatReport({ errors, warnings }) {
   return [
     ...errors.map((error) => `✗ ${error}`),
-    ...warnings.map((warning) => `! ${warning}`),
-  ].join('\n');
+    ...warnings.map((warning) => `! ${warning}`)
+  ].join("\n");
 }

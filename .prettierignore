@@ -1,0 +1,4 @@
+dist/
+docs/
+.link-check.local.json
+package-lock.json

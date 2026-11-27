@@ -1,5 +1,5 @@
-import { readFile, readdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { readFile, readdir } from "node:fs/promises";
+import { join } from "node:path";
 
 /**
  * @typedef {object} Section
@@ -33,7 +33,7 @@ import { join } from 'node:path';
  * @param {string} file
  */
 export async function readJson(file) {
-  const text = await readFile(file, 'utf8');
+  const text = await readFile(file, "utf8");
   try {
     return JSON.parse(text);
   } catch (error) {
@@ -47,18 +47,20 @@ export async function readJson(file) {
  * @returns {Promise<Project>}
  */
 export async function loadProject(root) {
-  const dataDir = join(root, 'data');
-  const meta = await readJson(join(dataDir, 'meta.json'));
-  const index = await readJson(join(dataDir, 'sections.json'));
+  const dataDir = join(root, "data");
+  const meta = await readJson(join(dataDir, "meta.json"));
+  const index = await readJson(join(dataDir, "sections.json"));
 
-  const sectionDir = join(dataDir, 'sections');
-  const names = (await readdir(sectionDir)).filter((name) => name.endsWith('.json'));
-  const files = new Map(names.map((name) => [name.slice(0, -'.json'.length), join(sectionDir, name)]));
+  const sectionDir = join(dataDir, "sections");
+  const names = (await readdir(sectionDir)).filter((name) => name.endsWith(".json"));
+  const files = new Map(
+    names.map((name) => [name.slice(0, -".json".length), join(sectionDir, name)])
+  );
 
   const order = Array.isArray(index?.sections) ? index.sections : [];
   const sections = new Map();
   for (const id of order) {
-    if (typeof id !== 'string') continue;
+    if (typeof id !== "string") continue;
     const file = files.get(id);
     if (file) sections.set(id, await readJson(file));
   }

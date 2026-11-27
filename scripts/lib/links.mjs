@@ -18,7 +18,7 @@ export function collectUrls({ index, sections }) {
 
     for (const item of section.items) {
       const url = item?.url;
-      if (typeof url !== 'string' || seen.has(url)) continue;
+      if (typeof url !== "string" || seen.has(url)) continue;
       seen.add(url);
       urls.push(url);
     }
@@ -57,8 +57,8 @@ export function isKnownRestricted(url, hosts) {
  * @returns {'ok' | 'blocked' | 'broken' | 'error'}
  */
 export function classifyStatus(status) {
-  if (status >= 200 && status < 400) return 'ok';
-  if (status === 401 || status === 403 || status === 405 || status === 429) return 'blocked';
-  if (status === 404 || status === 410) return 'broken';
-  return 'error';
+  if (status >= 200 && status < 400) return "ok";
+  if (status === 401 || status === 403 || status === 405 || status === 429) return "blocked";
+  if (status === 404 || status === 410) return "broken";
+  return "error";
 }

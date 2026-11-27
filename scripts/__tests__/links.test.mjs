@@ -1,45 +1,47 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import { classifyStatus, collectUrls, isKnownRestricted } from '../lib/links.mjs';
+import test from "node:test";
+import assert from "node:assert/strict";
+import { classifyStatus, collectUrls, isKnownRestricted } from "../lib/links.mjs";
 
-test('按顺序收集并去重 URL', () => {
+test("按顺序收集并去重 URL", () => {
   const project = {
-    index: { sections: ['a', 'b'] },
+    index: { sections: ["a", "b"] },
     sections: new Map([
-      ['a', { items: [{ url: 'https://example.com/a' }, { url: 'https://example.com/a' }] }],
-      ['b', { items: [{ url: 'https://example.com/b' }, { url: 42 }] }],
-    ]),
+      ["a", { items: [{ url: "https://example.com/a" }, { url: "https://example.com/a" }] }],
+      ["b", { items: [{ url: "https://example.com/b" }, { url: 42 }] }]
+    ])
   };
 
-  assert.deepEqual(collectUrls(project), ['https://example.com/a', 'https://example.com/b']);
+  assert.deepEqual(collectUrls(project), ["https://example.com/a", "https://example.com/b"]);
 });
 
-test('缺失章节不会中断收集', () => {
+test("缺失章节不会中断收集", () => {
   const project = {
-    index: { sections: ['missing', 'a'] },
-    sections: new Map([['a', { items: [{ url: 'https://example.com/a' }] }]]),
+    index: { sections: ["missing", "a"] },
+    sections: new Map([["a", { items: [{ url: "https://example.com/a" }] }]])
   };
 
-  assert.deepEqual(collectUrls(project), ['https://example.com/a']);
+  assert.deepEqual(collectUrls(project), ["https://example.com/a"]);
 });
 
-test('状态码分类', () => {
-  assert.equal(classifyStatus(200), 'ok');
-  assert.equal(classifyStatus(204), 'ok');
-  assert.equal(classifyStatus(301), 'ok');
-  assert.equal(classifyStatus(403), 'blocked');
-  assert.equal(classifyStatus(429), 'blocked');
-  assert.equal(classifyStatus(404), 'broken');
-  assert.equal(classifyStatus(410), 'broken');
-  assert.equal(classifyStatus(500), 'error');
-  assert.equal(classifyStatus(0), 'error');
+test("状态码分类", () => {
+  assert.equal(classifyStatus(200), "ok");
+  assert.equal(classifyStatus(204), "ok");
+  assert.equal(classifyStatus(301), "ok");
+  assert.equal(classifyStatus(403), "blocked");
+  assert.equal(classifyStatus(401), "blocked");
+  assert.equal(classifyStatus(405), "blocked");
+  assert.equal(classifyStatus(429), "blocked");
+  assert.equal(classifyStatus(404), "broken");
+  assert.equal(classifyStatus(410), "broken");
+  assert.equal(classifyStatus(500), "error");
+  assert.equal(classifyStatus(0), "error");
 });
 
-test('已知受限域名匹配含子域名', () => {
-  const hosts = ['platform.openai.com', 'huggingface.co'];
+test("已知受限域名匹配含子域名", () => {
+  const hosts = ["platform.openai.com", "huggingface.co"];
 
-  assert.equal(isKnownRestricted('https://platform.openai.com/docs/models', hosts), true);
-  assert.equal(isKnownRestricted('https://cdn.huggingface.co/learn', hosts), true);
-  assert.equal(isKnownRestricted('https://notopenai.com', hosts), false);
-  assert.equal(isKnownRestricted('not a url', hosts), false);
+  assert.equal(isKnownRestricted("https://platform.openai.com/docs/models", hosts), true);
+  assert.equal(isKnownRestricted("https://cdn.huggingface.co/learn", hosts), true);
+  assert.equal(isKnownRestricted("https://notopenai.com", hosts), false);
+  assert.equal(isKnownRestricted("not a url", hosts), false);
 });

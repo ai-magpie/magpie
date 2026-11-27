@@ -1,4 +1,4 @@
-import { createSlugger } from './slug.mjs';
+import { orderedSections } from "./order.mjs";
 
 /**
  * HTML 转义：文本节点与属性值共用。
@@ -7,11 +7,11 @@ import { createSlugger } from './slug.mjs';
  */
 export function escapeHtml(value) {
   return String(value)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 /**
@@ -20,8 +20,8 @@ export function escapeHtml(value) {
  * @returns {string}
  */
 export function siteUrl(meta) {
-  if (typeof meta.site === 'string' && meta.site.trim() !== '') return meta.site;
-  const [owner, name] = String(meta.repo).split('/');
+  if (typeof meta.site === "string" && meta.site.trim() !== "") return meta.site;
+  const [owner, name] = String(meta.repo).split("/");
   return `https://${owner}.github.io/${name}/`;
 }
 
@@ -36,8 +36,8 @@ function renderSection(section) {
     '    <div class="section-head">',
     `      <h2>${escapeHtml(section.title)}</h2>`,
     `      <span class="section-count">${items.length}</span>`,
-    '    </div>',
-    `    <p class="section-desc">${escapeHtml(section.description)}</p>`,
+    "    </div>",
+    `    <p class="section-desc">${escapeHtml(section.description)}</p>`
   ];
 
   if (section.intro) {
@@ -51,14 +51,14 @@ function renderSection(section) {
     for (const item of items) {
       const search = `${item.name} ${item.description}`;
       lines.push(
-        `      <li data-search="${escapeHtml(search)}"><a class="entry-name" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.name)}</a><span class="entry-desc">${escapeHtml(item.description)}</span></li>`,
+        `      <li data-search="${escapeHtml(search)}"><a class="entry-name" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.name)}</a><span class="entry-desc">${escapeHtml(item.description)}</span></li>`
       );
     }
-    lines.push('    </ul>');
+    lines.push("    </ul>");
   }
 
-  lines.push('  </section>');
-  return lines.join('\n');
+  lines.push("  </section>");
+  return lines.join("\n");
 }
 
 /**
@@ -68,18 +68,11 @@ function renderSection(section) {
  * @returns {string}
  */
 export function renderSite({ meta, index, sections }, template) {
-  const slug = createSlugger();
-  const order = Array.isArray(index?.sections) ? index.sections : [];
-  const entries = order
-    .filter((id) => sections.has(id))
-    .map((id) => {
-      const section = sections.get(id);
-      return { ...section, anchor: slug(section.title) };
-    });
+  const entries = orderedSections({ index, sections });
 
   const total = entries.reduce(
     (sum, section) => sum + (Array.isArray(section.items) ? section.items.length : 0),
-    0,
+    0
   );
 
   const values = {
@@ -92,11 +85,13 @@ export function renderSite({ meta, index, sections }, template) {
     REPO: escapeHtml(meta.repo),
     LICENSE: escapeHtml(meta.license),
     COUNT: String(total),
-    NAV: entries.map((section) => `<a href="#${section.anchor}">${escapeHtml(section.title)}</a>`).join(''),
-    BODY: entries.map(renderSection).join('\n'),
+    NAV: entries
+      .map((section) => `<a href="#${section.anchor}">${escapeHtml(section.title)}</a>`)
+      .join(""),
+    BODY: entries.map(renderSection).join("\n")
   };
 
   return template.replace(/\{\{([A-Z_]+)\}\}/g, (placeholder, key) =>
-    Object.hasOwn(values, key) ? values[key] : placeholder,
+    Object.hasOwn(values, key) ? values[key] : placeholder
   );
 }

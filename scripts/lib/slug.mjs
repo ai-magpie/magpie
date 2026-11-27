@@ -12,11 +12,11 @@
  */
 export function slugify(text) {
   return String(text)
-    .normalize('NFKC')
+    .normalize("NFKC")
     .toLowerCase()
-    .replace(/[^\p{L}\p{N}\p{M}\s_-]/gu, '')
+    .replace(/[^\p{L}\p{N}\p{M}\s_-]/gu, "")
     .trim()
-    .replace(/\s+/g, '-');
+    .replace(/\s+/g, "-");
 }
 
 /**

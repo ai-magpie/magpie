@@ -1,4 +1,4 @@
-<!-- 本文件由 scripts/build.mjs 从 data/ 自动生成，请勿直接编辑；修改 data/ 后运行 `pnpm build`。 -->
+<!-- 本文件由 scripts/build.mjs 从 data/ 自动生成，请勿直接编辑；修改 data/ 后运行 `npm run build`。 -->
 
 # Magpie
 
@@ -282,11 +282,11 @@ Model Context Protocol 的规范、注册表、目录与开发工具；不逐个
 
 ## 贡献
 
-发现遗漏或失效的条目，欢迎提交 PR。请保持一节一条、按主题归类，并附上一句话说明它解决什么问题。
+发现遗漏或失效的条目，欢迎提交 PR。请保持一节一条、按主题归类，并附上一句话说明它解决什么问题。提交前运行 `npm run format` 统一格式。
 
-编辑 `data/sections/` 下的 JSON 文件后运行 `pnpm build` 重新生成 README，不要直接修改本文件。
+编辑 `data/sections/` 下的 JSON 文件后运行 `npm run build` 重新生成 README，不要直接修改本文件。
 
-提交前可运行 `pnpm check:links` 抽查外链，失效链接请替换或移除。
+提交前可运行 `npm run check:links` 抽查外链，失效链接请替换或移除。
 
 ## 许可
 

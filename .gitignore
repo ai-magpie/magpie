@@ -3,11 +3,23 @@ node_modules/
 .DS_Store
 *.log
 
+# 环境变量与密钥
+.env
+.env.*
+!.env.example
+
+# 编辑器与工具缓存
+.vscode/
+.idea/
+.eslintcache
+.prettiercache
+*.tsbuildinfo
+
 # 站点构建产物
 dist/
 
 # 本机网络下的外链忽略清单
 .link-check.local.json
 
-# 本地设计文档，不随仓库分发
+# 本地文档（AI 生成文档统一放 docs/ 下，避免误提交）
 docs/

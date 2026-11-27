@@ -1,21 +1,21 @@
 #!/usr/bin/env node
-import { createReadStream } from 'node:fs';
-import { stat } from 'node:fs/promises';
-import { createServer } from 'node:http';
-import { extname, join, resolve, sep } from 'node:path';
+import { createReadStream } from "node:fs";
+import { stat } from "node:fs/promises";
+import { createServer } from "node:http";
+import { extname, join, resolve, sep } from "node:path";
 
-const root = resolve(import.meta.dirname, '..', 'dist');
+const root = resolve(import.meta.dirname, "..", "dist");
 const port = Number(process.env.PORT ?? 4173);
 
 const TYPES = {
-  '.html': 'text/html; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.svg': 'image/svg+xml',
-  '.json': 'application/json; charset=utf-8',
-  '.txt': 'text/plain; charset=utf-8',
-  '.png': 'image/png',
-  '.ico': 'image/x-icon',
+  ".html": "text/html; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".js": "text/javascript; charset=utf-8",
+  ".svg": "image/svg+xml",
+  ".json": "application/json; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
+  ".png": "image/png",
+  ".ico": "image/x-icon"
 };
 
 /**
@@ -42,7 +42,7 @@ async function resolveFile(urlPath) {
   }
 
   if (info.isDirectory()) {
-    filePath = join(filePath, 'index.html');
+    filePath = join(filePath, "index.html");
     try {
       info = await stat(filePath);
     } catch {
@@ -53,16 +53,18 @@ async function resolveFile(urlPath) {
 }
 
 createServer(async (request, response) => {
-  const pathname = new URL(request.url ?? '/', 'http://localhost').pathname;
+  const pathname = new URL(request.url ?? "/", "http://localhost").pathname;
   const filePath = await resolveFile(pathname);
 
   if (!filePath) {
-    response.writeHead(404, { 'content-type': TYPES['.html'] });
-    createReadStream(join(root, '404.html')).pipe(response);
+    response.writeHead(404, { "content-type": TYPES[".html"] });
+    createReadStream(join(root, "404.html")).pipe(response);
     return;
   }
 
-  response.writeHead(200, { 'content-type': TYPES[extname(filePath)] ?? 'application/octet-stream' });
+  response.writeHead(200, {
+    "content-type": TYPES[extname(filePath)] ?? "application/octet-stream"
+  });
   createReadStream(filePath).pipe(response);
 }).listen(port, () => {
   console.log(`预览：http://localhost:${port}/`);
