@@ -1,0 +1,38 @@
+{
+  "id": "local-inference",
+  "title": "本地模型与推理",
+  "description": "在自己的机器或集群上运行开源模型，兼顾隐私、成本与可控性。",
+  "intro": "本地运行适合隐私敏感数据、离线场景与低成本实验；显存与量化格式通常比参数量更影响实际体验。",
+  "items": [
+    {
+      "name": "Ollama",
+      "url": "https://ollama.com",
+      "description": "一条命令在本地运行开源模型，并提供常用 REST 接口。"
+    },
+    {
+      "name": "llama.cpp",
+      "url": "https://github.com/ggml-org/llama.cpp",
+      "description": "C/C++ 推理引擎，支持 GGUF 量化与多平台部署。"
+    },
+    {
+      "name": "vLLM",
+      "url": "https://github.com/vllm-project/vllm",
+      "description": "高吞吐推理与服务引擎，核心是 PagedAttention。"
+    },
+    {
+      "name": "SGLang",
+      "url": "https://github.com/sgl-project/sglang",
+      "description": "面向高并发服务的推理框架，提供 RadixAttention 等优化。"
+    },
+    {
+      "name": "LM Studio",
+      "url": "https://lmstudio.ai",
+      "description": "桌面端本地模型运行器，带图形界面与本地 API。"
+    },
+    {
+      "name": "MLX",
+      "url": "https://github.com/ml-explore/mlx",
+      "description": "Apple 为自家芯片设计的数组框架，支持本地训练与推理。"
+    }
+  ]
+}

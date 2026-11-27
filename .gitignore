@@ -1,0 +1,7 @@
+# 依赖与系统文件
+node_modules/
+.DS_Store
+*.log
+
+# 本地设计文档，不随仓库分发
+docs/

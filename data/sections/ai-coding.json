@@ -1,0 +1,42 @@
+{
+  "id": "ai-coding",
+  "title": "AI 编程助手",
+  "description": "把需求、代码库与终端交给模型的项目，覆盖补全、结对编程与自动化改码。",
+  "items": [
+    {
+      "name": "Claude Code",
+      "url": "https://claude.com/product/claude-code",
+      "description": "Anthropic 的终端编程代理，可读取仓库、执行命令并修改代码。"
+    },
+    {
+      "name": "Cursor",
+      "url": "https://cursor.com",
+      "description": "AI 优先的代码编辑器，支持跨文件编辑与 Agent 模式。"
+    },
+    {
+      "name": "GitHub Copilot",
+      "url": "https://github.com/features/copilot",
+      "description": "GitHub 的 AI 编程助手，覆盖补全、对话与代码审查。"
+    },
+    {
+      "name": "OpenAI Codex CLI",
+      "url": "https://github.com/openai/codex",
+      "description": "OpenAI 的开源终端编码代理，支持沙箱执行与审批。"
+    },
+    {
+      "name": "Aider",
+      "url": "https://aider.chat",
+      "description": "在终端里与 LLM 结对编程，自动生成并提交 Git 变更。"
+    },
+    {
+      "name": "Cline",
+      "url": "https://cline.bot",
+      "description": "开源 VS Code 代理，可在编辑器内规划并执行多步任务。"
+    },
+    {
+      "name": "Continue",
+      "url": "https://continue.dev",
+      "description": "开源 IDE 编程助手，可接入自有模型或本地模型。"
+    }
+  ]
+}

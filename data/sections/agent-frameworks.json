@@ -1,0 +1,42 @@
+{
+  "id": "agent-frameworks",
+  "title": "Agent 框架与协议",
+  "description": "构建、编排与连接智能体的基础设施，从单 Agent 循环到多 Agent 协作。",
+  "items": [
+    {
+      "name": "LangGraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "description": "以图结构编排有状态 Agent，支持持久化与人工介入。"
+    },
+    {
+      "name": "CrewAI",
+      "url": "https://github.com/crewAIInc/crewAI",
+      "description": "面向多 Agent 协作的框架，用角色与任务描述工作流。"
+    },
+    {
+      "name": "AutoGen",
+      "url": "https://github.com/microsoft/autogen",
+      "description": "微软的多 Agent 对话框架，用于构建可协作的智能体系统。"
+    },
+    {
+      "name": "OpenAI Agents SDK",
+      "url": "https://github.com/openai/openai-agents-python",
+      "description": "轻量多 Agent 框架，提供任务交接、护栏与追踪。"
+    },
+    {
+      "name": "Model Context Protocol",
+      "url": "https://modelcontextprotocol.io",
+      "description": "开放协议，用统一方式把工具与数据接入模型应用。"
+    },
+    {
+      "name": "PydanticAI",
+      "url": "https://ai.pydantic.dev",
+      "description": "Pydantic 团队的类型安全 Agent 框架，强调结构化输出。"
+    },
+    {
+      "name": "LlamaIndex",
+      "url": "https://github.com/run-llama/llama_index",
+      "description": "面向私有数据的 LLM 应用框架，擅长索引与检索。"
+    }
+  ]
+}
