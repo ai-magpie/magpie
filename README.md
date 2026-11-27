@@ -286,6 +286,8 @@ Model Context Protocol 的规范、注册表、目录与开发工具；不逐个
 
 编辑 `data/sections/` 下的 JSON 文件后运行 `pnpm build` 重新生成 README，不要直接修改本文件。
 
+提交前可运行 `pnpm check:links` 抽查外链，失效链接请替换或移除。
+
 ## 许可
 
 [MIT](LICENSE) © ai-magpie

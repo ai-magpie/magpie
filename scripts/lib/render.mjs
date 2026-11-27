@@ -71,7 +71,15 @@ export function renderReadme({ meta, index, sections }) {
   for (const entry of entries) blocks.push(renderSection(entry));
 
   blocks.push(
-    ['## 贡献', '', meta.contributing, '', '编辑 `data/sections/` 下的 JSON 文件后运行 `pnpm build` 重新生成 README，不要直接修改本文件。'].join('\n'),
+    [
+      '## 贡献',
+      '',
+      meta.contributing,
+      '',
+      '编辑 `data/sections/` 下的 JSON 文件后运行 `pnpm build` 重新生成 README，不要直接修改本文件。',
+      '',
+      '提交前可运行 `pnpm check:links` 抽查外链，失效链接请替换或移除。',
+    ].join('\n'),
   );
   blocks.push(['## 许可', '', `[${meta.license}](LICENSE) © ${String(meta.repo).split('/')[0]}`].join('\n'));
 
