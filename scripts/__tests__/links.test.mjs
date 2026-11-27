@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { classifyStatus, collectUrls } from '../lib/links.mjs';
+import { classifyStatus, collectUrls, isKnownRestricted } from '../lib/links.mjs';
 
 test('按顺序收集并去重 URL', () => {
   const project = {
@@ -33,4 +33,13 @@ test('状态码分类', () => {
   assert.equal(classifyStatus(410), 'broken');
   assert.equal(classifyStatus(500), 'error');
   assert.equal(classifyStatus(0), 'error');
+});
+
+test('已知受限域名匹配含子域名', () => {
+  const hosts = ['platform.openai.com', 'huggingface.co'];
+
+  assert.equal(isKnownRestricted('https://platform.openai.com/docs/models', hosts), true);
+  assert.equal(isKnownRestricted('https://cdn.huggingface.co/learn', hosts), true);
+  assert.equal(isKnownRestricted('https://notopenai.com', hosts), false);
+  assert.equal(isKnownRestricted('not a url', hosts), false);
 });

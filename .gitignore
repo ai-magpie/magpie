@@ -6,5 +6,8 @@ node_modules/
 # 站点构建产物
 dist/
 
+# 本机网络下的外链忽略清单
+.link-check.local.json
+
 # 本地设计文档，不随仓库分发
 docs/

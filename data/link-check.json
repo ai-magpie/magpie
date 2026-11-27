@@ -1,0 +1,24 @@
+{
+  "knownRestricted": [
+    {
+      "host": "platform.openai.com",
+      "reason": "文档站对自动化请求返回 403"
+    },
+    {
+      "host": "www.midjourney.com",
+      "reason": "反爬返回 403"
+    },
+    {
+      "host": "www.canva.com",
+      "reason": "反爬返回 403"
+    },
+    {
+      "host": "www.genspark.ai",
+      "reason": "反爬返回 403"
+    },
+    {
+      "host": "www.adobe.com",
+      "reason": "部分页面反爬返回 403"
+    }
+  ]
+}

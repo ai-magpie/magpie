@@ -28,6 +28,26 @@ export function collectUrls({ index, sections }) {
 }
 
 /**
+ * 判断 URL 是否命中已知受限域名（含子域名）。
+ * @param {string} url
+ * @param {Iterable<string>} hosts 小写域名
+ * @returns {boolean}
+ */
+export function isKnownRestricted(url, hosts) {
+  let hostname;
+  try {
+    hostname = new URL(url).hostname.toLowerCase();
+  } catch {
+    return false;
+  }
+
+  for (const host of hosts) {
+    if (hostname === host || hostname.endsWith(`.${host}`)) return true;
+  }
+  return false;
+}
+
+/**
  * 状态码分类：
  * - ok：2xx/3xx，可访问
  * - blocked：反爬或限流，站点存在但拒绝脚本
