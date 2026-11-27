@@ -1,0 +1,16 @@
+# Dependabot：每月检查 GitHub Actions 版本，有更新自动提 PR。
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "dependencies"
+    groups:
+      actions:
+        patterns:
+          - "*"
