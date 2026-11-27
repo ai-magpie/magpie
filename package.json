@@ -12,6 +12,6 @@
     "build": "node scripts/build.mjs",
     "validate": "node scripts/validate.mjs",
     "check": "node scripts/validate.mjs && node scripts/build.mjs --check",
-    "test": "node --test scripts/__tests__/"
+    "test": "node --test"
   }
 }
