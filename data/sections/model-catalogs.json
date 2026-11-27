@@ -1,0 +1,37 @@
+{
+  "id": "model-catalogs",
+  "title": "模型目录与榜单",
+  "description": "查询模型能力、价格与排名的上游数据源，用来校准清单而非替代清单。",
+  "items": [
+    {
+      "name": "LMArena",
+      "url": "https://lmarena.ai/",
+      "description": "基于人类对战投票的模型排名，偏主观体验。"
+    },
+    {
+      "name": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/",
+      "description": "对比模型质量、速度与价格，适合选型。"
+    },
+    {
+      "name": "models.dev",
+      "url": "https://models.dev/",
+      "description": "开源的模型与提供商元数据库，含上下文、价格与能力标记。"
+    },
+    {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/models",
+      "description": "开源模型与数据集的集散地，可查权重、许可与下载量。"
+    },
+    {
+      "name": "Ollama Library",
+      "url": "https://ollama.com/library",
+      "description": "可直接 ollama run 的模型清单，适合本地试跑。"
+    },
+    {
+      "name": "SWE-bench",
+      "url": "https://www.swebench.com/",
+      "description": "真实仓库 Issue 的编程评测，衡量 Agent 修 bug 能力。"
+    }
+  ]
+}

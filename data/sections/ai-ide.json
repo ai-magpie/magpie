@@ -1,0 +1,42 @@
+{
+  "id": "ai-ide",
+  "title": "AI 编辑器",
+  "description": "把 AI 内置到编辑器与 IDE 的产品，强调补全、对话与跨文件编辑。",
+  "items": [
+    {
+      "name": "Cursor",
+      "url": "https://cursor.com",
+      "description": "AI 优先的代码编辑器，支持跨文件编辑与 Agent 模式。"
+    },
+    {
+      "name": "Windsurf",
+      "url": "https://windsurf.com/",
+      "description": "内置 Agent 的编辑器，强调上下文感知与多步任务。"
+    },
+    {
+      "name": "GitHub Copilot",
+      "url": "https://github.com/features/copilot",
+      "description": "GitHub 的 AI 编程助手，覆盖补全、对话与代码审查。"
+    },
+    {
+      "name": "Continue",
+      "url": "https://continue.dev",
+      "description": "开源 IDE 编程助手，可接入自有模型或本地模型。"
+    },
+    {
+      "name": "Zed",
+      "url": "https://zed.dev/",
+      "description": "高性能协作编辑器，内置 AI 补全与 Agent 面板。"
+    },
+    {
+      "name": "Trae",
+      "url": "https://www.trae.ai/",
+      "description": "字节跳动的 AI IDE，提供中文场景与 Agent 模式。"
+    },
+    {
+      "name": "Kiro",
+      "url": "https://kiro.dev/",
+      "description": "AWS 的 AI IDE，以规格驱动开发与任务拆解为特色。"
+    }
+  ]
+}

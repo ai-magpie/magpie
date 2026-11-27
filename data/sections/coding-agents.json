@@ -1,0 +1,67 @@
+{
+  "id": "coding-agents",
+  "title": "编程 Agent",
+  "description": "在终端或编辑器里自主执行开发任务的代理，覆盖开箱即用产品与可自托管方案。",
+  "items": [
+    {
+      "name": "Claude Code",
+      "url": "https://claude.com/product/claude-code",
+      "description": "Anthropic 的终端编程代理，可读取仓库、执行命令并修改代码。"
+    },
+    {
+      "name": "OpenAI Codex CLI",
+      "url": "https://github.com/openai/codex",
+      "description": "OpenAI 的开源终端编码代理，支持沙箱执行与审批。"
+    },
+    {
+      "name": "DeepSeek Harness (DSH)",
+      "url": "https://github.com/deepseek-ai/deepseek-harness",
+      "description": "DeepSeek 的 Agent harness，支持 Skills、MCP、子 Agent 与插件。"
+    },
+    {
+      "name": "Aider",
+      "url": "https://aider.chat",
+      "description": "在终端里与 LLM 结对编程，自动生成并提交 Git 变更。"
+    },
+    {
+      "name": "OpenHands",
+      "url": "https://github.com/All-Hands-AI/OpenHands",
+      "description": "开源自主编程 Agent，可在沙箱中执行多步开发任务。"
+    },
+    {
+      "name": "Goose",
+      "url": "https://github.com/block/goose",
+      "description": "Block 开源的本地 Agent，支持扩展与多模型接入。"
+    },
+    {
+      "name": "opencode",
+      "url": "https://github.com/sst/opencode",
+      "description": "开源的终端编程 Agent，提供 TUI 与多模型切换。"
+    },
+    {
+      "name": "Gemini CLI",
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "description": "Google 的终端 Agent，可调用 Gemini 并执行本地操作。"
+    },
+    {
+      "name": "Qwen Code",
+      "url": "https://github.com/QwenLM/qwen-code",
+      "description": "阿里开源的终端编程 Agent，适配 Qwen 系列模型。"
+    },
+    {
+      "name": "Cline",
+      "url": "https://cline.bot",
+      "description": "VS Code 内的自主编程 Agent，可规划并执行多步任务。"
+    },
+    {
+      "name": "Amp",
+      "url": "https://ampcode.com/",
+      "description": "Sourcegraph 推出的编程 Agent，强调代码库级理解。"
+    },
+    {
+      "name": "Crush",
+      "url": "https://github.com/charmbracelet/crush",
+      "description": "Charm 的终端编程 Agent，界面与交互体验见长。"
+    }
+  ]
+}

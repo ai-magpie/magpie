@@ -1,0 +1,42 @@
+{
+  "id": "skills",
+  "title": "Agent Skills",
+  "description": "把可复用能力封装成 SKILL.md 的规范、注册表与合集；不逐个收录技能包。",
+  "items": [
+    {
+      "name": "Agent Skills 规范",
+      "url": "https://agentskills.io/specification",
+      "description": "SKILL.md 的字段、目录结构与加载规则，跨工具通用的能力封装格式。"
+    },
+    {
+      "name": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "description": "Anthropic 官方技能示例与 skill-creator，可作为编写模板。"
+    },
+    {
+      "name": "Claude Code Skills 文档",
+      "url": "https://code.claude.com/docs/en/skills",
+      "description": "Claude Code 中技能的位置、发现机制与调用方式。"
+    },
+    {
+      "name": "skills.sh",
+      "url": "https://skills.sh/",
+      "description": "Vercel 维护的技能注册表与安装 CLI，可浏览和分发技能。"
+    },
+    {
+      "name": "awesome-claude-skills",
+      "url": "https://github.com/Chat2AnyLLM/awesome-claude-skills",
+      "description": "社区维护的技能索引，按来源仓库汇总可发现的 SKILL.md。"
+    },
+    {
+      "name": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "description": "面向工程流程的技能合集，覆盖规划、调试与协作。"
+    },
+    {
+      "name": "DSH Skills",
+      "url": "https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.zh.md",
+      "description": "DSH 的技能子系统文档，说明技能发现、加载与调用方式。"
+    }
+  ]
+}

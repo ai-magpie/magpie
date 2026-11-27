@@ -10,33 +10,73 @@ Magpie 是一份人工策展的 AI 工具清单，关注能真正进入工作流
 
 ## 目录
 
-- [AI 编程助手](#ai-编程助手)
-- [Agent 框架与协议](#agent-框架与协议)
+- [大模型](#大模型)
+- [视频生成模型](#视频生成模型)
+- [模型平台](#模型平台)
 - [本地模型与推理](#本地模型与推理)
+- [编程 Agent](#编程-agent)
+- [AI 编辑器](#ai-编辑器)
+- [Agent 开发框架](#agent-开发框架)
+- [Agent Skills](#agent-skills)
+- [MCP 生态](#mcp-生态)
+- [模型目录与榜单](#模型目录与榜单)
 
-## AI 编程助手
+## 大模型
 
-把需求、代码库与终端交给模型的项目，覆盖补全、结对编程与自动化改码。
+语言与多模态基座模型家族，按厂商收录官方入口，不追具体版本号。
 
-- [Claude Code](https://claude.com/product/claude-code) — Anthropic 的终端编程代理，可读取仓库、执行命令并修改代码。
-- [Cursor](https://cursor.com) — AI 优先的代码编辑器，支持跨文件编辑与 Agent 模式。
-- [GitHub Copilot](https://github.com/features/copilot) — GitHub 的 AI 编程助手，覆盖补全、对话与代码审查。
-- [OpenAI Codex CLI](https://github.com/openai/codex) — OpenAI 的开源终端编码代理，支持沙箱执行与审批。
-- [Aider](https://aider.chat) — 在终端里与 LLM 结对编程，自动生成并提交 Git 变更。
-- [Cline](https://cline.bot) — 开源 VS Code 代理，可在编辑器内规划并执行多步任务。
-- [Continue](https://continue.dev) — 开源 IDE 编程助手，可接入自有模型或本地模型。
+- [OpenAI GPT](https://platform.openai.com/docs/models) — 覆盖通用对话、推理与多模态的模型家族，API 与 ChatGPT 同源。
+- [Anthropic Claude](https://docs.anthropic.com/en/docs/about-claude/models/overview) — 长上下文与工具调用见长，在编程和长程 Agent 任务中使用广泛。
+- [Google Gemini](https://deepmind.google/models/gemini/) — 原生多模态模型家族，支持超长上下文与图像、音频、视频输入。
+- [Meta Llama](https://www.llama.com/models/) — 开源权重模型家族，社区微调与本地部署生态丰富。
+- [Mistral](https://docs.mistral.ai/) — 欧洲厂商，提供开源权重与商用模型，覆盖文本、代码与多模态。
+- [DeepSeek](https://api-docs.deepseek.com/) — 开源权重模型，分 Pro 与 Flash 两档，长上下文与代码能力突出。
+- [阿里 Qwen](https://qwen.ai/) — 多尺寸开源权重家族，兼有闭源旗舰，中英文与代码场景覆盖广。
+- [Moonshot Kimi](https://platform.moonshot.ai/docs) — 长上下文与 Agent 能力见长，提供 API 与办公场景产品。
+- [Z.ai GLM](https://docs.z.ai/) — 智谱的 GLM 家族，以开源权重和 Agent 场景为主，提供 API 服务。
+- [MiniMax](https://platform.minimaxi.com/) — 文本、语音与视频多模态模型，提供面向开发者的 API。
+- [xAI Grok](https://docs.x.ai/) — 强调实时信息与推理的模型家族，提供 API 与消费级产品。
+- [ByteDance Seed](https://seed.bytedance.com/) — 字节跳动的模型品牌，豆包系列覆盖文本、图像与视频生成。
 
-## Agent 框架与协议
+## 视频生成模型
 
-构建、编排与连接智能体的基础设施，从单 Agent 循环到多 Agent 协作。
+文生视频与图生视频模型，兼顾闭源产品与可自部署的开源权重。
 
-- [LangGraph](https://github.com/langchain-ai/langgraph) — 以图结构编排有状态 Agent，支持持久化与人工介入。
-- [CrewAI](https://github.com/crewAIInc/crewAI) — 面向多 Agent 协作的框架，用角色与任务描述工作流。
-- [AutoGen](https://github.com/microsoft/autogen) — 微软的多 Agent 对话框架，用于构建可协作的智能体系统。
-- [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) — 轻量多 Agent 框架，提供任务交接、护栏与追踪。
-- [Model Context Protocol](https://modelcontextprotocol.io) — 开放协议，用统一方式把工具与数据接入模型应用。
-- [PydanticAI](https://ai.pydantic.dev) — Pydantic 团队的类型安全 Agent 框架，强调结构化输出。
-- [LlamaIndex](https://github.com/run-llama/llama_index) — 面向私有数据的 LLM 应用框架，擅长索引与检索。
+- [OpenAI Sora](https://openai.com/sora) — 面向镜头叙事与物理一致性的视频生成产品，支持原生音频与故事板。
+- [Google Veo](https://deepmind.google/models/veo/) — 原生音视频生成，强调镜头控制与画面一致性。
+- [快手 Kling](https://klingai.com/) — 支持较长时长、多模态参考与镜头控制，面向创作者。
+- [ByteDance Seedance](https://seed.bytedance.com/en/seedance) — 支持文、图、音、视频混合参考，强调运动与主体一致性。
+- [阿里 Wan](https://wan.video/) — 开源权重与托管服务并行，覆盖文生视频与图生视频。
+- [MiniMax Hailuo](https://hailuoai.video/) — 人物表演与镜头运动见长，提供网页端与 API。
+- [Runway](https://runwayml.com/) — 面向影视与广告的创作套件，含生成、编辑与后期工具。
+- [Luma Dream Machine](https://lumalabs.ai/dream-machine) — 快速迭代的视频生成产品，强调自然运镜与一致角色。
+- [Pika](https://pika.art/) — 轻量特效与短视频生成，适合社交媒体内容。
+- [Lightricks LTX](https://ltx.studio/) — 开源权重视频模型，支持较快生成与本地部署。
+- [腾讯 HunyuanVideo](https://github.com/Tencent-Hunyuan/HunyuanVideo) — 开源权重视频生成模型，支持本地推理与二次开发。
+- [Genmo Mochi](https://github.com/genmoai/mochi) — 开源权重视频模型，适合研究与自部署实验。
+
+## 模型平台
+
+托管 API、推理服务与云平台，按接入方式收录。
+
+- [OpenRouter](https://openrouter.ai/) — 统一路由多家模型，按量计费，适合快速比较多模型效果。
+- [Together AI](https://www.together.ai/) — 托管开源模型与微调服务，提供兼容 OpenAI 的接口。
+- [Fireworks AI](https://fireworks.ai/) — 面向生产环境的推理服务，强调低延迟与模型微调。
+- [Groq](https://groq.com/) — 自研 LPU 推理硬件，主打低延迟的文本与语音模型服务。
+- [Cerebras](https://www.cerebras.ai/) — 晶圆级芯片推理，适合超高速生成场景。
+- [Baseten](https://www.baseten.co/) — 模型部署与推理平台，支持自定义模型与自动扩缩容。
+- [Replicate](https://replicate.com/) — 以社区模型为特色的托管推理，覆盖图像、视频与音频。
+- [fal.ai](https://fal.ai/) — 面向生成式媒体的推理平台，图像与视频模型接入快。
+- [DeepInfra](https://deepinfra.com/) — 按 token 计费的开源模型推理服务，价格透明。
+- [硅基流动 SiliconFlow](https://siliconflow.cn/) — 国内模型 API 平台，聚合开源与国产模型。
+- [Amazon Bedrock](https://aws.amazon.com/bedrock/) — AWS 的托管模型服务，统一接入多家厂商模型。
+- [Google Vertex AI](https://cloud.google.com/vertex-ai) — Google Cloud 的模型与 Agent 平台，托管 Gemini 等模型。
+- [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry) — 微软的模型与 Agent 平台，托管 OpenAI 及第三方模型。
+- [Vercel AI Gateway](https://vercel.com/ai-gateway) — 统一网关，按请求路由多家模型并集中计费。
+- [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) — 边缘运行时上的模型推理，适合轻量、低延迟场景。
+- [火山方舟](https://www.volcengine.com/product/ark) — 字节跳动的模型服务平台，托管豆包与 Seed 系列。
+- [阿里百炼](https://www.aliyun.com/product/bailian) — 阿里云的模型与应用平台，托管通义与第三方模型。
+- [ModelScope 魔搭](https://modelscope.cn/) — 国内模型社区与托管平台，提供模型下载与在线推理。
 
 ## 本地模型与推理
 
@@ -50,6 +90,89 @@ Magpie 是一份人工策展的 AI 工具清单，关注能真正进入工作流
 - [SGLang](https://github.com/sgl-project/sglang) — 面向高并发服务的推理框架，提供 RadixAttention 等优化。
 - [LM Studio](https://lmstudio.ai) — 桌面端本地模型运行器，带图形界面与本地 API。
 - [MLX](https://github.com/ml-explore/mlx) — Apple 为自家芯片设计的数组框架，支持本地训练与推理。
+
+## 编程 Agent
+
+在终端或编辑器里自主执行开发任务的代理，覆盖开箱即用产品与可自托管方案。
+
+- [Claude Code](https://claude.com/product/claude-code) — Anthropic 的终端编程代理，可读取仓库、执行命令并修改代码。
+- [OpenAI Codex CLI](https://github.com/openai/codex) — OpenAI 的开源终端编码代理，支持沙箱执行与审批。
+- [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness) — DeepSeek 的 Agent harness，支持 Skills、MCP、子 Agent 与插件。
+- [Aider](https://aider.chat) — 在终端里与 LLM 结对编程，自动生成并提交 Git 变更。
+- [OpenHands](https://github.com/All-Hands-AI/OpenHands) — 开源自主编程 Agent，可在沙箱中执行多步开发任务。
+- [Goose](https://github.com/block/goose) — Block 开源的本地 Agent，支持扩展与多模型接入。
+- [opencode](https://github.com/sst/opencode) — 开源的终端编程 Agent，提供 TUI 与多模型切换。
+- [Gemini CLI](https://github.com/google-gemini/gemini-cli) — Google 的终端 Agent，可调用 Gemini 并执行本地操作。
+- [Qwen Code](https://github.com/QwenLM/qwen-code) — 阿里开源的终端编程 Agent，适配 Qwen 系列模型。
+- [Cline](https://cline.bot) — VS Code 内的自主编程 Agent，可规划并执行多步任务。
+- [Amp](https://ampcode.com/) — Sourcegraph 推出的编程 Agent，强调代码库级理解。
+- [Crush](https://github.com/charmbracelet/crush) — Charm 的终端编程 Agent，界面与交互体验见长。
+
+## AI 编辑器
+
+把 AI 内置到编辑器与 IDE 的产品，强调补全、对话与跨文件编辑。
+
+- [Cursor](https://cursor.com) — AI 优先的代码编辑器，支持跨文件编辑与 Agent 模式。
+- [Windsurf](https://windsurf.com/) — 内置 Agent 的编辑器，强调上下文感知与多步任务。
+- [GitHub Copilot](https://github.com/features/copilot) — GitHub 的 AI 编程助手，覆盖补全、对话与代码审查。
+- [Continue](https://continue.dev) — 开源 IDE 编程助手，可接入自有模型或本地模型。
+- [Zed](https://zed.dev/) — 高性能协作编辑器，内置 AI 补全与 Agent 面板。
+- [Trae](https://www.trae.ai/) — 字节跳动的 AI IDE，提供中文场景与 Agent 模式。
+- [Kiro](https://kiro.dev/) — AWS 的 AI IDE，以规格驱动开发与任务拆解为特色。
+
+## Agent 开发框架
+
+构建、编排与部署 Agent 的库与运行时，从单 Agent 循环到多 Agent 工作流。
+
+- [LangGraph](https://github.com/langchain-ai/langgraph) — 以图结构编排有状态 Agent，支持持久化与人工介入。
+- [CrewAI](https://github.com/crewAIInc/crewAI) — 面向多 Agent 协作的框架，用角色与任务描述工作流。
+- [AutoGen](https://github.com/microsoft/autogen) — 微软的多 Agent 对话框架，用于构建可协作的智能体系统。
+- [Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/) — 微软的 Agent 开发框架，覆盖 .NET 与 Python，支持多 Agent 工作流。
+- [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) — 轻量多 Agent 框架，提供任务交接、护栏与追踪。
+- [Google ADK](https://github.com/google/adk-python) — Google 的 Agent 开发套件，支持工具、多 Agent 与部署。
+- [AWS Strands](https://github.com/strands-agents/sdk-python) — AWS 的模型驱动 Agent SDK，强调工具调用与多 Agent。
+- [PydanticAI](https://ai.pydantic.dev) — Pydantic 团队的类型安全 Agent 框架，强调结构化输出。
+- [smolagents](https://github.com/huggingface/smolagents) — Hugging Face 的轻量框架，以代码执行作为 Agent 动作。
+- [LlamaIndex](https://github.com/run-llama/llama_index) — 面向私有数据的 LLM 应用框架，擅长索引与检索。
+- [Mastra](https://mastra.ai/) — TypeScript 优先的 Agent 框架，内置工作流、记忆与评测。
+- [DSPy](https://dspy.ai/) — 用声明式程序优化提示与流程，适合可评测的 LLM 管线。
+
+## Agent Skills
+
+把可复用能力封装成 SKILL.md 的规范、注册表与合集；不逐个收录技能包。
+
+- [Agent Skills 规范](https://agentskills.io/specification) — SKILL.md 的字段、目录结构与加载规则，跨工具通用的能力封装格式。
+- [anthropics/skills](https://github.com/anthropics/skills) — Anthropic 官方技能示例与 skill-creator，可作为编写模板。
+- [Claude Code Skills 文档](https://code.claude.com/docs/en/skills) — Claude Code 中技能的位置、发现机制与调用方式。
+- [skills.sh](https://skills.sh/) — Vercel 维护的技能注册表与安装 CLI，可浏览和分发技能。
+- [awesome-claude-skills](https://github.com/Chat2AnyLLM/awesome-claude-skills) — 社区维护的技能索引，按来源仓库汇总可发现的 SKILL.md。
+- [obra/superpowers](https://github.com/obra/superpowers) — 面向工程流程的技能合集，覆盖规划、调试与协作。
+- [DSH Skills](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.zh.md) — DSH 的技能子系统文档，说明技能发现、加载与调用方式。
+
+## MCP 生态
+
+Model Context Protocol 的规范、注册表、目录与开发工具；不逐个收录 Server。
+
+- [MCP 官方文档](https://modelcontextprotocol.io/) — 协议规范、SDK 与接入指南的入口。
+- [MCP Registry](https://registry.modelcontextprotocol.io/) — 官方 Server 注册表，可按命名空间检索与发布。
+- [Smithery](https://smithery.ai/) — MCP Server 目录与托管服务，支持一键接入客户端。
+- [mcp.so](https://mcp.so/) — 社区维护的 MCP Server 索引，按场景与客户端筛选。
+- [Glama MCP](https://glama.ai/mcp/servers) — 可检索并对比 MCP Server 的目录，提供接入信息。
+- [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) — 社区精选 Server 列表，按语言与用途分类。
+- [FastMCP](https://github.com/jlowin/fastmcp) — 用 Python 快速编写 MCP Server 的框架。
+- [MCP Inspector](https://github.com/modelcontextprotocol/inspector) — 调试 MCP Server 的官方工具，可查看工具与消息。
+- [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) — 官方 TypeScript SDK，用于实现 Server 与 Client。
+
+## 模型目录与榜单
+
+查询模型能力、价格与排名的上游数据源，用来校准清单而非替代清单。
+
+- [LMArena](https://lmarena.ai/) — 基于人类对战投票的模型排名，偏主观体验。
+- [Artificial Analysis](https://artificialanalysis.ai/) — 对比模型质量、速度与价格，适合选型。
+- [models.dev](https://models.dev/) — 开源的模型与提供商元数据库，含上下文、价格与能力标记。
+- [Hugging Face](https://huggingface.co/models) — 开源模型与数据集的集散地，可查权重、许可与下载量。
+- [Ollama Library](https://ollama.com/library) — 可直接 ollama run 的模型清单，适合本地试跑。
+- [SWE-bench](https://www.swebench.com/) — 真实仓库 Issue 的编程评测，衡量 Agent 修 bug 能力。
 
 ## 贡献
 

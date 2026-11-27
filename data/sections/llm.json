@@ -1,0 +1,67 @@
+{
+  "id": "llm",
+  "title": "大模型",
+  "description": "语言与多模态基座模型家族，按厂商收录官方入口，不追具体版本号。",
+  "items": [
+    {
+      "name": "OpenAI GPT",
+      "url": "https://platform.openai.com/docs/models",
+      "description": "覆盖通用对话、推理与多模态的模型家族，API 与 ChatGPT 同源。"
+    },
+    {
+      "name": "Anthropic Claude",
+      "url": "https://docs.anthropic.com/en/docs/about-claude/models/overview",
+      "description": "长上下文与工具调用见长，在编程和长程 Agent 任务中使用广泛。"
+    },
+    {
+      "name": "Google Gemini",
+      "url": "https://deepmind.google/models/gemini/",
+      "description": "原生多模态模型家族，支持超长上下文与图像、音频、视频输入。"
+    },
+    {
+      "name": "Meta Llama",
+      "url": "https://www.llama.com/models/",
+      "description": "开源权重模型家族，社区微调与本地部署生态丰富。"
+    },
+    {
+      "name": "Mistral",
+      "url": "https://docs.mistral.ai/",
+      "description": "欧洲厂商，提供开源权重与商用模型，覆盖文本、代码与多模态。"
+    },
+    {
+      "name": "DeepSeek",
+      "url": "https://api-docs.deepseek.com/",
+      "description": "开源权重模型，分 Pro 与 Flash 两档，长上下文与代码能力突出。"
+    },
+    {
+      "name": "阿里 Qwen",
+      "url": "https://qwen.ai/",
+      "description": "多尺寸开源权重家族，兼有闭源旗舰，中英文与代码场景覆盖广。"
+    },
+    {
+      "name": "Moonshot Kimi",
+      "url": "https://platform.moonshot.ai/docs",
+      "description": "长上下文与 Agent 能力见长，提供 API 与办公场景产品。"
+    },
+    {
+      "name": "Z.ai GLM",
+      "url": "https://docs.z.ai/",
+      "description": "智谱的 GLM 家族，以开源权重和 Agent 场景为主，提供 API 服务。"
+    },
+    {
+      "name": "MiniMax",
+      "url": "https://platform.minimaxi.com/",
+      "description": "文本、语音与视频多模态模型，提供面向开发者的 API。"
+    },
+    {
+      "name": "xAI Grok",
+      "url": "https://docs.x.ai/",
+      "description": "强调实时信息与推理的模型家族，提供 API 与消费级产品。"
+    },
+    {
+      "name": "ByteDance Seed",
+      "url": "https://seed.bytedance.com/",
+      "description": "字节跳动的模型品牌，豆包系列覆盖文本、图像与视频生成。"
+    }
+  ]
+}

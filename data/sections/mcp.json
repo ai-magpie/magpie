@@ -1,0 +1,52 @@
+{
+  "id": "mcp",
+  "title": "MCP 生态",
+  "description": "Model Context Protocol 的规范、注册表、目录与开发工具；不逐个收录 Server。",
+  "items": [
+    {
+      "name": "MCP 官方文档",
+      "url": "https://modelcontextprotocol.io/",
+      "description": "协议规范、SDK 与接入指南的入口。"
+    },
+    {
+      "name": "MCP Registry",
+      "url": "https://registry.modelcontextprotocol.io/",
+      "description": "官方 Server 注册表，可按命名空间检索与发布。"
+    },
+    {
+      "name": "Smithery",
+      "url": "https://smithery.ai/",
+      "description": "MCP Server 目录与托管服务，支持一键接入客户端。"
+    },
+    {
+      "name": "mcp.so",
+      "url": "https://mcp.so/",
+      "description": "社区维护的 MCP Server 索引，按场景与客户端筛选。"
+    },
+    {
+      "name": "Glama MCP",
+      "url": "https://glama.ai/mcp/servers",
+      "description": "可检索并对比 MCP Server 的目录，提供接入信息。"
+    },
+    {
+      "name": "awesome-mcp-servers",
+      "url": "https://github.com/punkpeye/awesome-mcp-servers",
+      "description": "社区精选 Server 列表，按语言与用途分类。"
+    },
+    {
+      "name": "FastMCP",
+      "url": "https://github.com/jlowin/fastmcp",
+      "description": "用 Python 快速编写 MCP Server 的框架。"
+    },
+    {
+      "name": "MCP Inspector",
+      "url": "https://github.com/modelcontextprotocol/inspector",
+      "description": "调试 MCP Server 的官方工具，可查看工具与消息。"
+    },
+    {
+      "name": "MCP TypeScript SDK",
+      "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+      "description": "官方 TypeScript SDK，用于实现 Server 与 Client。"
+    }
+  ]
+}

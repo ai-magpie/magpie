@@ -1,7 +1,14 @@
 {
   "sections": [
-    "ai-coding",
+    "llm",
+    "video-models",
+    "model-platforms",
+    "local-inference",
+    "coding-agents",
+    "ai-ide",
     "agent-frameworks",
-    "local-inference"
+    "skills",
+    "mcp",
+    "model-catalogs"
   ]
 }
