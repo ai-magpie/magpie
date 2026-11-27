@@ -56,6 +56,15 @@ test('空章节给出提示而非静默消失', () => {
   assert.match(md, /暂无收录/);
 });
 
+test('meta.site 存在时顶部渲染在线浏览链接', () => {
+  const md = renderReadme({
+    ...project,
+    meta: { ...project.meta, site: 'https://example.com/magpie/' },
+  });
+
+  assert.ok(md.includes('**[在线浏览](https://example.com/magpie/)**'));
+});
+
 test('intro 渲染在描述之后、条目之前', () => {
   const withIntro = {
     ...project,

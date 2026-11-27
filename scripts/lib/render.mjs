@@ -57,6 +57,7 @@ export function renderReadme({ meta, index, sections }) {
 
   /** @type {string[]} */
   const blocks = [GENERATED_NOTE, `# ${meta.title}`, `> ${meta.tagline}`];
+  if (meta.site) blocks.push(`**[在线浏览](${escapeUrl(meta.site)})**`);
   if (meta.description) blocks.push(meta.description);
 
   const toc = ['## 目录', ''];

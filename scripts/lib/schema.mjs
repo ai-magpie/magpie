@@ -51,6 +51,9 @@ export function validateData({ meta, index, files, sections }) {
     for (const field of META_FIELDS) {
       if (!isText(meta[field])) errors.push(`data/meta.json 缺少非空字段 "${field}"`);
     }
+    if (meta.site !== undefined && (!isText(meta.site) || !normalizeUrl(meta.site))) {
+      errors.push('data/meta.json 的 "site" 必须是可解析的 https 链接');
+    }
   }
 
   if (!isObject(index) || !Array.isArray(index.sections)) {

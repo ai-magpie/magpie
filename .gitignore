@@ -3,5 +3,8 @@ node_modules/
 .DS_Store
 *.log
 
+# 站点构建产物
+dist/
+
 # 本地设计文档，不随仓库分发
 docs/

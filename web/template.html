@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{PAGE_TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{TITLE}}">
+  <meta property="og:title" content="{{PAGE_TITLE}}">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到内容</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./">{{TITLE}}</a>
+      <div class="search">
+        <label class="sr-only" for="q">搜索条目</label>
+        <input id="q" type="search" placeholder="搜索工具或描述…" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">/</kbd>
+      </div>
+    </div>
+    <p class="tagline wrap">{{TAGLINE}}</p>
+  </header>
+
+  <nav class="section-nav wrap" aria-label="章节">{{NAV}}</nav>
+
+  <main id="content" class="wrap">
+    <p class="count" id="count" aria-live="polite">共 {{COUNT}} 个条目</p>
+    <p class="empty-state" id="empty" hidden>没有匹配的条目，试试更短的关键词。</p>
+{{BODY}}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><a href="{{REPO_URL}}">{{REPO}}</a> · {{LICENSE}} License · 内容维护在 <code>data/</code>，欢迎提交 PR</p>
+    </div>
+  </footer>
+
+  <script src="./assets/app.js" defer></script>
+</body>
+</html>

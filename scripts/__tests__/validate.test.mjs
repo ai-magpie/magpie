@@ -95,6 +95,13 @@ test('空 items 给出警告', () => {
   assert.match(report.warnings.join('\n'), /没有条目/);
 });
 
+test('meta.site 非法时报错', () => {
+  const project = fixture();
+  project.meta.site = 'http://example.com';
+
+  assert.match(validateData(project).errors.join('\n'), /"site"/);
+});
+
 test('normalizeUrl 忽略末尾斜杠', () => {
   assert.equal(normalizeUrl('https://Example.com/a/'), normalizeUrl('https://example.com/a'));
 });

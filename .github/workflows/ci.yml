@@ -18,4 +18,5 @@ jobs:
           node-version: 22
       - run: node scripts/validate.mjs
       - run: node scripts/build.mjs --check
+      - run: node scripts/build-site.mjs
       - run: node --test

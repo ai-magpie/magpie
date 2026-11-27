@@ -10,6 +10,8 @@
   },
   "scripts": {
     "build": "node scripts/build.mjs",
+    "site": "node scripts/build-site.mjs",
+    "preview": "node scripts/build-site.mjs && node scripts/serve.mjs",
     "validate": "node scripts/validate.mjs",
     "check": "node scripts/validate.mjs && node scripts/build.mjs --check",
     "test": "node --test"
