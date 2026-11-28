@@ -8,7 +8,6 @@
   const searchBox = $(".search");
   const clear = $("#clear");
   const running = $("#running");
-  const status = $("#status");
   const srStatus = $("#sr-status");
   const empty = $("#empty");
   const emptyQ = $("#empty-q");
@@ -21,7 +20,9 @@
   const rows = $$(".row");
   const secs = $$(".sec");
   const railLinks = $$(".rail a");
-  if (!input || !status || !empty) return;
+  if (!input || !empty) return;
+
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
   /* ------------------------------------------------------------------ 主题 */
   const KEY = "magpie-theme";
@@ -43,27 +44,31 @@
   };
 
   const mql = matchMedia("(prefers-color-scheme: dark)");
-  const SUN =
-    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M2.8 2.8l1.1 1.1M12.1 12.1l1.1 1.1M13.2 2.8l-1.1 1.1M3.9 12.1l-1.1 1.1" stroke-linecap="round"/></svg>';
-  const MOON =
-    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M13.2 9.6A5.6 5.6 0 0 1 6.4 2.8a5.6 5.6 0 1 0 6.8 6.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
+  const themeMeta = $("#theme-color");
   const isDark = () => (root.dataset.theme ? root.dataset.theme === "dark" : mql.matches);
   const syncTheme = () => {
     const dark = isDark();
-    toggle.innerHTML = dark ? MOON : SUN;
+    toggle.dataset.dark = String(dark);
     root.style.colorScheme = root.dataset.theme || "";
-    toggle.setAttribute("aria-label", dark ? "切换到浅色主题" : "切换到深色主题");
     toggle.setAttribute("aria-pressed", String(dark));
+    if (themeMeta) themeMeta.content = dark ? "#0a0a0c" : "#fbfbfc";
+  };
+  /* 换肤那一帧整体禁过渡，避免背景瞬变、描边还在补间 */
+  const applyTheme = () => {
+    root.classList.add("theme-swap");
+    syncTheme();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => root.classList.remove("theme-swap"));
+    });
   };
   syncTheme();
   toggle.addEventListener("click", () => {
     root.dataset.theme = isDark() ? "light" : "dark";
-    syncTheme();
+    applyTheme();
     store.set(root.dataset.theme);
   });
   mql.addEventListener("change", () => {
-    if (!root.dataset.theme) syncTheme();
+    if (!root.dataset.theme) applyTheme();
   });
 
   /* ------------------------------------------------------------------ 搜索 */
@@ -93,10 +98,9 @@
     secs.map((sec) => [sec.dataset.sec, sec.querySelector(".sec-c b[data-total]")])
   );
 
-  const statusCount = document.createElement("b");
-  const statusRest = document.createTextNode("");
-  status.replaceChildren("匹配 ", statusCount, statusRest);
   let announceTimer = 0;
+  /* 过滤结果并进顶栏标题位，不另起一行，列表不会因它出现而位移 */
+  let searchInfo = "";
 
   /** 在原文上做大小写不敏感匹配：索引天然对齐，<mark> 保留原文大小写。 */
   const escRe = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -192,20 +196,13 @@
       }
     }
 
-    status.hidden = query === "";
-    if (query) {
-      statusCount.textContent = String(shownRows);
-      statusRest.textContent =
-        " 个条目 · " + shownSections + " 个章节" + (shownRows ? "" : "，按 Esc 清空搜索");
-    }
+    searchInfo = query ? `匹配 ${shownRows} 个条目 · ${shownSections} 个章节` : "";
+
     empty.hidden = shownRows !== 0;
-    status.classList.toggle("is-empty", shownRows === 0);
     wrap.classList.toggle("is-empty", shownSections === 0);
     if (shownRows === 0 && emptyQ && emptyQ.textContent !== input.value.trim()) {
       emptyQ.textContent = input.value.trim();
     }
-    searchBox?.classList.toggle("has-value", input.value !== "");
-    if (clear) clear.hidden = input.value === "";
 
     clearTimeout(announceTimer);
     announceTimer = setTimeout(() => {
@@ -215,19 +212,28 @@
         : `显示全部 ${rowState.length} 个条目`;
     }, 320);
 
-    syncRailMask();
-    spy();
+    /* 批量写 DOM 之后不要在同一个 rAF 里读几何：下一帧再算 */
+    requestAnimationFrame(() => {
+      measure();
+      spy();
+    });
   };
 
   const scheduleApply = () => {
     if (!frame) frame = requestAnimationFrame(runApply);
   };
 
-  const resetInput = () => {
+  const syncInputUI = () => {
+    if (clear) clear.hidden = input.value === "";
+    searchBox?.classList.toggle("has-value", input.value !== "");
+  };
+
+  const resetInput = (refocus = true) => {
     input.value = "";
     lastQuery = null;
+    syncInputUI();
     scheduleApply();
-    input.focus();
+    if (refocus) input.focus({ preventScroll: true });
   };
 
   let composing = false;
@@ -239,12 +245,14 @@
     scheduleApply();
   });
   input.addEventListener("input", (event) => {
+    /* 与过滤结果无关的即时 UI，不能被 runApply 的去重挡住（例如只输入空格） */
+    syncInputUI();
     if (composing || event.isComposing) return;
     scheduleApply();
   });
 
-  if (clear) clear.addEventListener("click", resetInput);
-  if (emptyClear) emptyClear.addEventListener("click", resetInput);
+  if (clear) clear.addEventListener("click", () => resetInput(true));
+  if (emptyClear) emptyClear.addEventListener("click", () => resetInput(false));
 
   /* --------------------------------------------------------------- 键盘 */
   const isEditable = (el) =>
@@ -262,9 +270,7 @@
     if (event.key === "Escape" && document.activeElement === input) {
       event.preventDefault();
       if (input.value !== "") {
-        input.value = "";
-        lastQuery = null;
-        scheduleApply();
+        resetInput(false);
       } else {
         input.blur();
       }
@@ -276,25 +282,58 @@
   let current = "";
   let lastTitle = null;
   let lastOn = null;
+  const secTitle = new Map(secs.map((sec) => [sec, sec.querySelector("h2")]));
+
+  const syncRailMask = () => {
+    if (!railNav) return;
+    const max = railNav.scrollWidth - railNav.clientWidth;
+    railNav.classList.toggle("is-left", railNav.scrollLeft > 2);
+    /* 到右端就撤掉右渐隐，避免「假的可滚动」提示 */
+    railNav.classList.toggle("is-scrollable", max > 4 && railNav.scrollLeft < max - 2);
+  };
+
+  const measure = () => {
+    line = (hdr.offsetHeight || 56) + 40;
+    syncRailMask();
+  };
+
+  /* 用户刚动过横向导航时不要抢滚动 */
+  let railHold = 0;
+  const holdRail = () => {
+    railHold = performance.now() + 1200;
+  };
+  for (const type of ["wheel", "pointerdown", "touchstart"]) {
+    railNav?.addEventListener(type, holdRail, { passive: true });
+  }
+  railNav?.addEventListener("scroll", syncRailMask, { passive: true });
 
   const scrollActiveIntoView = (force) => {
     if (!railNav || railNav.scrollWidth <= railNav.clientWidth + 4) return;
+    if (!force && performance.now() < railHold) return;
     const link = railLinks.find((item) => item.classList.contains("is-active"));
     if (!link) return;
     const navRect = railNav.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
+    const pad = 24;
+    /* 已经完整可见就不动它 */
+    if (!force && linkRect.left >= navRect.left + pad && linkRect.right <= navRect.right - pad) {
+      return;
+    }
     const max = railNav.scrollWidth - railNav.clientWidth;
     const next = Math.min(max, Math.max(0, linkRect.left - navRect.left + railNav.scrollLeft - 40));
-    if (force || Math.abs(next - railNav.scrollLeft) > 1) railNav.scrollLeft = next;
+    if (!force && Math.abs(next - railNav.scrollLeft) <= 1) return;
+    railNav.scrollTo({ left: next, behavior: reduceMotion.matches ? "instant" : "smooth" });
   };
 
   function spy() {
-    line = (hdr.offsetHeight || 56) + 40;
-
     let hit = null;
+    let real = false;
     for (const sec of secs) {
       if (sec.hidden) continue;
-      if (sec.getBoundingClientRect().top <= line) hit = sec;
+      if (sec.getBoundingClientRect().top <= line) {
+        hit = sec;
+        real = true;
+      }
     }
     if (!hit) hit = secs.find((sec) => !sec.hidden) || null;
 
@@ -311,18 +350,19 @@
       for (const link of railLinks) {
         const on = link.dataset.sec === id;
         link.classList.toggle("is-active", on);
-        if (on) link.setAttribute("aria-current", "true");
+        if (on) link.setAttribute("aria-current", "location");
         else link.removeAttribute("aria-current");
       }
       scrollActiveIntoView(false);
     }
 
-    const on = scrollY > 240;
-    const title = on ? (hit ? ($("h2", hit)?.textContent ?? "") : "") : "";
+    /* 搜索时顶栏显示命中数；否则只在章节真的顶到顶栏下沿时报名字 */
+    const title = searchInfo || (real && hit ? (secTitle.get(hit)?.textContent ?? "") : "");
     if (title !== lastTitle) {
       running.textContent = title;
       lastTitle = title;
     }
+    const on = title !== "";
     if (on !== lastOn) {
       running.classList.toggle("is-on", on);
       hdr.classList.toggle("is-running", on);
@@ -330,23 +370,16 @@
     }
   }
 
-  const syncRailMask = () => {
-    if (!railNav) return;
-    railNav.classList.toggle("is-scrollable", railNav.scrollWidth > railNav.clientWidth + 4);
-  };
-
   let ticking = false;
   const onFrame = () => {
     ticking = false;
     hdr.classList.toggle("is-scrolled", scrollY > 8);
     spy();
     if (backTop) {
-      const show = scrollY > innerHeight;
-      if (backTop.classList.contains("show") !== show) {
-        backTop.classList.toggle("show", show);
-        backTop.setAttribute("aria-hidden", show ? "false" : "true");
-        backTop.tabIndex = show ? 0 : -1;
-      }
+      const shown = backTop.classList.contains("show");
+      /* 迟滞：入场 1.05 屏、退场 0.95 屏，阈值附近不会来回闪 */
+      const show = scrollY > innerHeight * (shown ? 0.95 : 1.05);
+      if (shown !== show) backTop.classList.toggle("show", show);
     }
   };
   const requestFrame = () => {
@@ -358,24 +391,23 @@
 
   addEventListener("scroll", requestFrame, { passive: true });
   addEventListener("resize", () => {
-    syncRailMask();
+    measure();
     scrollActiveIntoView(true);
     requestFrame();
   });
 
   if (backTop) {
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     backTop.addEventListener("click", () => {
-      scrollTo({ top: 0, behavior: reduced ? "instant" : "smooth" });
+      scrollTo({ top: 0, behavior: reduceMotion.matches ? "instant" : "smooth" });
     });
   }
 
-  searchBox?.classList.toggle("has-value", input.value !== "");
+  syncInputUI();
+  measure();
   onFrame();
-  syncRailMask();
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
-      syncRailMask();
+      measure();
       spy();
     });
   }

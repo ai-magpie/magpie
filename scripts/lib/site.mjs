@@ -79,7 +79,10 @@ function hashOf(value) {
   return hash >>> 0;
 }
 
-/** 单字块可用的色相档位数量，与 style.css 里的 .mg-h* 一一对应。 */
+/**
+ * 单字块按名称取色：同名同色、不同条目之间保持一点节奏。
+ * 色相数量与 style.css 里的 .mg-h* 一一对应。
+ */
 const HUE_STEPS = 8;
 
 /**

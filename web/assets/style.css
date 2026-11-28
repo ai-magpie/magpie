@@ -38,10 +38,36 @@ body {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 3px;
+}
+/* 跳过链接的落点由滚动位置表达，不必把整列内容框起来 */
+.content:focus-visible {
+  outline: none;
 }
 a {
   color: inherit;
+}
+a,
+button,
+.row,
+.rail a,
+.ftr-links a {
+  touch-action: manipulation;
+}
+/* 触屏没有真正的 hover：别让箭头和下划线点完一直留着 */
+@media (hover: none) {
+  .row:hover {
+    background: transparent;
+  }
+  .row:hover .ra {
+    color: var(--field-line);
+    transform: none;
+  }
+  .row:hover .rn {
+    text-decoration: none;
+  }
+  .row:active {
+    background: color-mix(in srgb, var(--accent) 8%, var(--hover));
+  }
 }
 h1,
 h2 {
@@ -90,14 +116,21 @@ kbd {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
-.hdr.is-scrolled {
-  border-bottom-color: var(--line);
+.hdr::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: var(--line);
+  opacity: 0;
+  transition: opacity var(--dur-1) var(--ease-out);
+}
+.hdr.is-scrolled::after {
+  opacity: 1;
 }
 .hdr-in {
   width: min(100% - 40px, var(--wrap));
@@ -167,9 +200,8 @@ kbd {
   color: var(--ink-2);
   cursor: pointer;
   transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease;
+    background-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
 }
 .icon-btn:hover {
   background: var(--hover);
@@ -304,7 +336,7 @@ kbd {
 .lede {
   grid-area: lede;
   align-self: end;
-  margin: 0 0 8px;
+  margin: 0;
   max-width: 30em;
   font-size: var(--fs-lg);
   line-height: 1.7;
@@ -384,46 +416,16 @@ kbd {
 .content {
   min-width: 0;
 }
-.status {
-  margin: 0 0 16px;
-  font-family: var(--mono);
-  font-size: var(--fs-meta);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.02em;
-  color: var(--ink-2);
-}
-.status[hidden] {
-  display: none;
-}
-.status b {
-  color: var(--accent);
-  font-weight: 600;
-}
-/* 空结果时状态行只留给读屏器，视觉上由空状态区块表达 */
-.status.is-empty {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
 
 .sec {
   border: 1px solid var(--line);
   border-radius: var(--r);
   background: var(--surface);
-  box-shadow: var(--card-bevel, none);
+  box-shadow: var(--card-shadow, none);
   overflow: hidden;
-  transition: border-color 0.2s ease;
 }
 .sec + .sec {
-  margin-top: 20px;
-}
-.sec:hover {
-  border-color: var(--line-2);
+  margin-top: 32px;
 }
 .sec[hidden] {
   display: none;
@@ -528,7 +530,7 @@ kbd {
   display: block;
   font-family: var(--row-name-font, var(--sans));
   font-size: var(--fs-base);
-  font-weight: var(--w-strong, 600);
+  font-weight: 500;
   font-synthesis-weight: none;
   letter-spacing: -0.008em;
   white-space: nowrap;
@@ -536,10 +538,7 @@ kbd {
   text-overflow: ellipsis;
 }
 .row:hover .rn {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  text-decoration-color: var(--line-2);
+  text-decoration: none;
 }
 .rd {
   font-size: var(--fs-sm);
@@ -565,8 +564,8 @@ kbd {
 .ra {
   width: 13px;
   height: 13px;
-  color: var(--ink-3);
-  opacity: 0.42;
+  color: var(--field-line);
+  opacity: 0.9;
   transform: translate(-3px, 3px);
   transition:
     opacity 0.15s ease,
@@ -579,14 +578,21 @@ kbd {
   transform: none;
 }
 mark {
-  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
   color: var(--ink);
-  padding: 0 2px;
-  border-radius: 3px;
+  /* 内联盒的 padding 会改变行宽 → 截断点随输入跳动；用负 margin 抵消 */
+  padding: 0 1px;
+  margin: 0 -1px;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .wrap.is-empty {
   grid-template-columns: minmax(0, 1fr);
+}
+.wrap.is-empty .rail {
+  display: none;
 }
 .empty {
   padding: 72px 20px 80px;
@@ -736,6 +742,11 @@ mark {
     display: none;
   }
 }
+@media (max-width: 1000px) {
+  .rn {
+    white-space: normal;
+  }
+}
 @media (max-width: 860px) {
   .sec-h {
     flex-wrap: wrap;
@@ -750,8 +761,8 @@ mark {
     grid-template-columns: 26px minmax(0, 1fr) 16px;
     grid-template-areas:
       "mg name arrow"
-      "mg desc arrow"
-      "mg url  arrow";
+      "mg url  arrow"
+      "mg desc arrow";
     align-items: start;
     row-gap: 2px;
     column-gap: 12px;
@@ -767,7 +778,7 @@ mark {
   }
   .rd {
     grid-area: desc;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
   }
   .ru {
     grid-area: url;
@@ -803,9 +814,6 @@ mark {
   }
 }
 @media (max-width: 640px) {
-  :root {
-    --hdr-h: 90px;
-  }
   .search input {
     font-size: 16px;
   }
@@ -868,16 +876,6 @@ mark {
   }
 }
 
-@media (prefers-contrast: more) {
-  :root {
-    --ink-2: #3d4248;
-    --ink-3: #3d4248;
-    --line: #b6bbc2;
-    --line-2: #8b919a;
-    --field-line: var(--ink-3);
-  }
-}
-
 @media (forced-colors: active) {
   mark {
     background: Mark;
@@ -935,13 +933,13 @@ mark {
   --bg: #fbfbfc;
   --surface: #ffffff;
   --ink: #0b0c0e;
-  --ink-2: #5b6067;
-  --ink-3: #63686f; /* 5.43:1，11px 元数据 */
+  --ink-2: #4a4f56; /* 8.25:1，正文与描述 */
+  --ink-3: #6b7078; /* 4.98:1，11px 元数据 */
   --ink-dim: #6f757d; /* 仅用于 h1 大字 */
-  --ink-4: #a8adb4; /* 装饰（箭头） */
-  --line: #e9eaee;
-  --line-2: #d7dae0;
-  --field-line: #8b919a;
+  --ink-4: #a8adb4; /* 装饰 */
+  --line: #dedfe4;
+  --line-2: #c3c7ce; /* hover 边框 1.70:1，可感知 */
+  --field-line: #767c85; /* 表单与箭头 4.21:1 */
   --hover: #f5f6f8;
   --accent: #0f766e;
   --accent-soft: rgb(15 118 110 / 0.1);
@@ -971,11 +969,11 @@ mark {
   --h1-size: clamp(2rem, 3.4vw, 2.75rem);
   --h1-weight: 600;
   --h1-ls: -0.025em;
-  --row-cols: 26px minmax(8rem, 12rem) minmax(0, 1fr) minmax(6.5rem, max-content) 14px;
-  --rail-pt: 12px;
+  --row-cols: 26px minmax(8rem, 12rem) minmax(0, 1fr) 10rem 14px;
+  --rail-pt: 15px;
 
   /* 单字块：低饱和，色相由 --h 驱动 */
-  --card-bevel: inset 0 1px 0 rgb(255 255 255 / 0.7);
+  --card-shadow: 0 1px 2px rgb(11 12 14 / 0.05), 0 2px 8px rgb(11 12 14 / 0.03);
   --mg-fs: 48%;
   --mg-fl: 30%;
   --mg-bs: 46%;
@@ -984,19 +982,20 @@ mark {
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #08080a;
-    --surface: #101012;
-    --ink: #ededf0;
-    --ink-2: #9ba1a9;
-    --ink-3: #8b9299;
-    --line: #1e2024;
-    --line-2: #2c2f34;
-    --field-line: #5c626a;
-    --hover: #17191c;
-    --accent: #2dd4bf;
-    --accent-soft: rgb(45 212 191 / 0.12);
+    --bg: #0a0a0c;
+    --surface: #131316;
+    --ink: #e6e8ec;
+    --ink-2: #929aa3;
+    --ink-3: #7f868e;
+    --line: #2b2f36;
+    --line-2: #3d424a;
+    --field-line: #6e757e;
+    --hover: #1a1c20;
+    --accent: #23ab9c;
+    --accent-soft: rgb(35 171 156 / 0.14);
+    --tint: color-mix(in srgb, var(--ink) 3%, transparent);
     --head-bg: color-mix(in srgb, var(--ink) 4%, transparent);
-    --card-bevel: inset 0 1px 0 rgb(255 255 255 / 0.04);
+    --card-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
     --mg-fs: 46%;
     --mg-fl: 68%;
     --mg-bs: 24%;
@@ -1006,19 +1005,20 @@ mark {
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #08080a;
-  --surface: #101012;
-  --ink: #ededf0;
-  --ink-2: #9ba1a9;
-  --ink-3: #8b9299;
-  --line: #1e2024;
-  --line-2: #2c2f34;
-  --field-line: #5c626a;
-  --hover: #17191c;
-  --accent: #2dd4bf;
-  --accent-soft: rgb(45 212 191 / 0.12);
+  --bg: #0a0a0c;
+  --surface: #131316;
+  --ink: #e6e8ec;
+  --ink-2: #929aa3;
+  --ink-3: #7f868e;
+  --line: #2b2f36;
+  --line-2: #3d424a;
+  --field-line: #6e757e;
+  --hover: #1a1c20;
+  --accent: #23ab9c;
+  --accent-soft: rgb(35 171 156 / 0.14);
+  --tint: color-mix(in srgb, var(--ink) 3%, transparent);
   --head-bg: color-mix(in srgb, var(--ink) 4%, transparent);
-  --card-bevel: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
   --mg-fs: 46%;
   --mg-fl: 68%;
   --mg-bs: 24%;
@@ -1065,6 +1065,40 @@ mark {
 }
 .mg-h7 {
   --h: 266;
+}
+
+/* 点击热区：外观不变，命中区补到 44px */
+.icon-btn,
+.search-clear,
+.back-top,
+.ftr-links a {
+  position: relative;
+}
+.icon-btn::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 10px;
+}
+.back-top::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+}
+.search-clear::after {
+  /* 18 → 24（WCAG AA 最小命中区），不再向输入框内延伸太多 */
+  content: "";
+  position: absolute;
+  inset: -3px;
+}
+.ftr-links a::after {
+  content: "";
+  position: absolute;
+  inset: -12px 0;
+}
+.hdr-tools {
+  gap: 12px;
 }
 
 /* 章节计数：数字用等宽，标签用读屏文本 */
@@ -1155,13 +1189,15 @@ mark {
   color: var(--ink-2);
   cursor: pointer;
   opacity: 0;
+  visibility: hidden;
   transform: translateY(6px);
   pointer-events: none;
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    color 0.15s ease,
-    border-color 0.15s ease;
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out),
+    visibility 0s linear var(--dur-2),
+    color var(--dur-1) var(--ease-out),
+    border-color var(--dur-1) var(--ease-out);
 }
 .back-top svg {
   width: 15px;
@@ -1169,8 +1205,10 @@ mark {
 }
 .back-top.show {
   opacity: 1;
+  visibility: visible;
   transform: none;
   pointer-events: auto;
+  transition-delay: 0s;
 }
 .back-top:hover {
   color: var(--accent);
@@ -1192,5 +1230,314 @@ mark {
   .back-top,
   .search-clear {
     display: none !important;
+  }
+}
+
+/* ==========================================================================
+   交互状态：时长 token、按下反馈、落点提示、换肤瞬切、图标交叉淡入
+   ========================================================================== */
+
+:root {
+  --dur-1: 120ms; /* 悬停、状态色 */
+  --dur-2: 200ms; /* 浮现、标题、位移 */
+  --dur-3: 260ms; /* 较大位移 */
+  --ease-out: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 换肤那一帧整体禁过渡，避免背景瞬变而描边还在补间 */
+.theme-swap,
+.theme-swap *,
+.theme-swap *::before,
+.theme-swap *::after {
+  transition: none !important;
+}
+
+/* 按下反馈：短、只动合成属性 */
+.row:active {
+  background: color-mix(in srgb, var(--accent) 8%, var(--hover));
+  transition-duration: 60ms;
+}
+.row:active .ra {
+  transform: translate(1px, -1px);
+  transition-duration: 60ms;
+}
+.rail a:active {
+  background: var(--hover);
+}
+.icon-btn:active,
+.empty-btn:active,
+.search-clear:active,
+.back-top.show:active {
+  transform: scale(0.94);
+  transition-duration: 60ms;
+}
+/* 触屏上系统高亮比自定义 :active 更早闪一下，关掉它 */
+.icon-btn,
+.empty-btn,
+.search-clear,
+.back-top,
+.row,
+.rail a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 锚点落点提示 */
+.sec:target {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes target-pulse {
+    from {
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+    to {
+      box-shadow: 0 0 0 0 transparent;
+    }
+  }
+  .sec:target {
+    animation: target-pulse var(--dur-3) var(--ease-out) 2;
+  }
+}
+
+/* 主题图标：两枚常驻，交叉淡入 */
+.icon-btn {
+  position: relative;
+}
+.icon-btn svg {
+  position: absolute;
+  transition:
+    opacity var(--dur-1) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.icon-btn .i-moon {
+  opacity: 0;
+  transform: rotate(-60deg) scale(0.7);
+}
+#theme[data-dark="true"] .i-sun {
+  opacity: 0;
+  transform: rotate(60deg) scale(0.7);
+}
+#theme[data-dark="true"] .i-moon {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   必须放在文件末尾：这些覆盖要晚于主题 :root 才会生效
+   ========================================================================== */
+
+/* 640 以下顶栏换成两行，实测 91px（32 + 8 + 32 + 18 + 1 边框） */
+@media (max-width: 640px) {
+  :root {
+    --hdr-h: 91px;
+  }
+}
+
+/* 高对比：提到主题块之后，并补深色分支 */
+@media (prefers-contrast: more) {
+  :root:root {
+    --ink-2: #3d4248;
+    --ink-3: #3d4248;
+    --line: #b6bbc2;
+    --line-2: #8b919a;
+    --field-line: #3d4248;
+  }
+}
+
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root:root:not([data-theme="light"]) {
+    --ink: #f5f6f8;
+    --ink-2: #d4d8dd;
+    --ink-3: #d4d8dd;
+    --line: #4a5058;
+    --line-2: #6b7280;
+    --field-line: #8b9299;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root[data-theme="dark"] {
+    --ink: #f5f6f8;
+    --ink-2: #d4d8dd;
+    --ink-3: #d4d8dd;
+    --line: #4a5058;
+    --line-2: #6b7280;
+    --field-line: #8b9299;
+  }
+}
+
+/* 打印：强制浅色，避免深色主题下白底白字；两栏压成单栏 */
+@media print {
+  :root,
+  :root[data-theme="dark"],
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #fff;
+    --surface: #fff;
+    --ink: #000;
+    --ink-2: #333;
+    --ink-3: #444;
+    --line: #ccc;
+    --line-2: #bbb;
+    --field-line: #000;
+    --accent: #000;
+    --card-shadow: none;
+  }
+  .mast-in {
+    display: block;
+    padding-block: 0 16pt;
+  }
+  .mast h1 {
+    font-size: 22pt;
+  }
+  .mast h1 br {
+    display: none;
+  }
+  .lede {
+    margin-top: 6pt;
+  }
+  .ftr-in {
+    grid-template-columns: 1fr;
+  }
+  .sec {
+    break-inside: auto;
+  }
+  .rows li {
+    break-inside: avoid;
+  }
+  mark {
+    background: none;
+    text-decoration: underline;
+  }
+  .ftr-links a[href^="http"]::after {
+    content: " " attr(href);
+    font-size: 9pt;
+    color: #555;
+  }
+}
+
+/* ==========================================================================
+   窄屏：横向章节栏吸顶，并补齐触摸与安全区
+   ========================================================================== */
+
+@media (max-width: 1180px) {
+  .rail {
+    position: sticky;
+    top: var(--hdr-h);
+    z-index: 10;
+    /* 全出血：抵消 .wrap 的 20px 内边距，滚过时两侧不透内容 */
+    margin-inline: -20px;
+    padding: 8px 20px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .rail nav {
+    padding-bottom: 0;
+    scroll-padding-inline: 20px 36px;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+  .rail a {
+    scroll-snap-align: start;
+    padding: 11px 12px;
+  }
+  /* 两端渐隐：左侧在向右滚过后出现，右侧到末尾即撤掉 */
+  .rail nav.is-scrollable {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+  .rail nav.is-left {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 24px);
+    mask-image: linear-gradient(to right, transparent, #000 24px);
+  }
+  .rail nav.is-left.is-scrollable {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 24px,
+      #000 calc(100% - 28px),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 24px,
+      #000 calc(100% - 28px),
+      transparent
+    );
+  }
+}
+
+/* 641~1180：搜索框不再占掉 header 四成宽度 */
+@media (min-width: 641px) and (max-width: 1180px) {
+  .search {
+    width: min(248px, 34vw);
+  }
+}
+
+/* 窄屏 h1：交给 balance，避免 320px 下最后一行只剩一个字 */
+@media (max-width: 420px) {
+  .mast h1 br {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  :root {
+    --h1-size: clamp(1.75rem, 8.4vw, 2.75rem);
+  }
+}
+
+/* 横屏矮视口：chrome 不能吃掉整屏 */
+@media (max-height: 430px) and (orientation: landscape) {
+  .mast-in {
+    padding-block: 14px 12px;
+    gap: 8px;
+  }
+  .mast h1 {
+    font-size: 1.375rem;
+  }
+  .eyebrow,
+  .lede {
+    display: none;
+  }
+  .wrap {
+    padding-top: 16px;
+  }
+}
+
+/* iOS 安全区 */
+@media (max-width: 640px) {
+  .back-top {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+  .ftr-in {
+    padding-bottom: calc(44px + env(safe-area-inset-bottom));
+  }
+}
+
+/* 窄屏有吸顶的章节栏，锚点落点要把它一起让开 */
+@media (max-width: 1180px) {
+  html {
+    scroll-padding-top: calc(var(--hdr-h) + 65px);
+  }
+}
+
+/* 强制色彩模式下的补充：品牌图形与当前章节 */
+@media (forced-colors: active) {
+  .brand svg rect,
+  .ftr-mark rect {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+  .rail a.is-active {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
+  .row:focus-visible,
+  .search input:focus-visible {
+    outline: 2px solid Highlight;
   }
 }

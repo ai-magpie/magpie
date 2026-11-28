@@ -6,7 +6,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:; connect-src 'none'"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{{PAGE_TITLE}}</title>
     <meta name="description" content="{{DESCRIPTION}}" />
     <link rel="canonical" href="{{CANONICAL}}" />
@@ -17,8 +17,7 @@
     <meta property="og:description" content="{{DESCRIPTION}}" />
     <meta property="og:url" content="{{CANONICAL}}" />
     <meta name="twitter:card" content="summary" />
-    <meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#08080a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" id="theme-color" content="#fbfbfc" />
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <!-- 首屏前确定主题，避免深色偏好用户看到闪白 -->
     <script src="./assets/theme.js"></script>
@@ -51,10 +50,11 @@
             class="icon-btn"
             id="theme"
             type="button"
-            aria-label="切换到深色主题"
+            aria-label="深色主题"
             aria-pressed="false"
           >
             <svg
+              class="i-sun"
               viewBox="0 0 16 16"
               fill="none"
               stroke="currentColor"
@@ -65,6 +65,20 @@
               <path
                 d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M2.8 2.8l1.1 1.1M12.1 12.1l1.1 1.1M13.2 2.8l-1.1 1.1M3.9 12.1l-1.1 1.1"
                 stroke-linecap="round"
+              />
+            </svg>
+            <svg
+              class="i-moon"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+              aria-hidden="true"
+            >
+              <path
+                d="M13.2 9.6A5.6 5.6 0 0 1 6.4 2.8a5.6 5.6 0 1 0 6.8 6.8Z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </button>
@@ -114,7 +128,6 @@
       </aside>
 
       <main class="content" id="main" tabindex="-1" aria-labelledby="page-title">
-        <p class="status" id="status" hidden></p>
         <p class="sr-only" id="sr-status" role="status" aria-live="polite" aria-atomic="true"></p>
         <div class="empty" id="empty" hidden>
           <p>没有匹配「<span id="empty-q"></span>」的条目</p>
@@ -157,7 +170,7 @@
       </div>
     </footer>
 
-    <button class="back-top" id="back-top" type="button" aria-label="回到顶部" aria-hidden="true">
+    <button class="back-top" id="back-top" type="button" aria-label="回到顶部">
       <svg
         viewBox="0 0 16 16"
         fill="none"
