@@ -10,85 +10,163 @@
     <title>{{PAGE_TITLE}}</title>
     <meta name="description" content="{{DESCRIPTION}}" />
     <link rel="canonical" href="{{CANONICAL}}" />
+    <meta name="color-scheme" content="light dark" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="{{TITLE}}" />
     <meta property="og:title" content="{{PAGE_TITLE}}" />
     <meta property="og:description" content="{{DESCRIPTION}}" />
     <meta property="og:url" content="{{CANONICAL}}" />
     <meta name="twitter:card" content="summary" />
-    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0e1013" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fbfbfc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#08080a" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <!-- 首屏前确定主题，避免深色偏好用户看到闪白 -->
+    <script src="./assets/theme.js"></script>
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
-    <a class="skip-link" href="#content">跳到内容</a>
+    <a class="skip" href="#main">跳到内容</a>
 
-    <header class="site-header">
-      <div class="wrap header-inner">
-        <a class="brand" href="./">
-          <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
-            <rect width="64" height="64" rx="14" fill="var(--mark-bg)" />
+    <header class="hdr" id="hdr">
+      <div class="hdr-in">
+        <a class="brand" href="./" aria-label="{{TITLE}} 首页">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="8.5" fill="var(--ink)" />
             <path
-              d="M17 45c11-1 19-9 23-24 3 13-1 24-11 29-5 3-10 1-12-5Z"
-              fill="var(--mark-body)"
+              d="M10.2 21.2V11l5.8 5.8L21.8 11v10.2"
+              fill="none"
+              stroke="var(--bg)"
+              stroke-width="2.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
-            <circle cx="41" cy="20" r="4.5" fill="var(--mark-eye)" />
+            <circle cx="24.4" cy="8.6" r="2" fill="var(--accent)" />
           </svg>
-          <span class="brand-text">
-            {{TITLE}}
-            <span class="brand-tag">{{TAGLINE}}</span>
-          </span>
+          <span>{{TITLE}}</span>
         </a>
-        <div class="search">
-          <label class="sr-only" for="q">搜索条目</label>
-          <input
-            id="q"
-            type="search"
-            placeholder="搜索工具或描述…"
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <button class="search-clear" id="clear" type="button" aria-label="清除搜索" hidden>
-            ×
+        <span class="hdr-sep" aria-hidden="true"></span>
+        <span class="running" id="running" aria-hidden="true"></span>
+        <div class="hdr-tools">
+          <button
+            class="icon-btn"
+            id="theme"
+            type="button"
+            aria-label="切换到深色主题"
+            aria-pressed="false"
+          >
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+              aria-hidden="true"
+            >
+              <circle cx="8" cy="8" r="3.2" />
+              <path
+                d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M2.8 2.8l1.1 1.1M12.1 12.1l1.1 1.1M13.2 2.8l-1.1 1.1M3.9 12.1l-1.1 1.1"
+                stroke-linecap="round"
+              />
+            </svg>
           </button>
-          <kbd aria-hidden="true">/</kbd>
+          <div class="search">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <circle cx="7" cy="7" r="4.4" />
+              <path d="m10.4 10.4 3 3" stroke-linecap="round" />
+            </svg>
+            <label class="sr-only" for="q">搜索条目</label>
+            <input
+              id="q"
+              type="search"
+              placeholder="搜索 {{COUNT}} 个条目…"
+              autocomplete="off"
+              spellcheck="false"
+              aria-keyshortcuts="/"
+              enterkeyhint="search"
+            />
+            <button class="search-clear" id="clear" type="button" aria-label="清除搜索" hidden>
+              ×
+            </button>
+            <kbd aria-hidden="true">/</kbd>
+          </div>
         </div>
       </div>
     </header>
 
-    <nav class="section-nav wrap" aria-label="章节">{{NAV}}</nav>
+    <section class="mast" id="top">
+      <div class="mast-in">
+        <p class="eyebrow">人工策展 · 每周更新</p>
+        <h1 id="page-title">
+          把散落各处的 AI 工具<br /><span class="dim">收进一份能用的清单</span>
+        </h1>
+        <p class="lede">{{DESCRIPTION}}</p>
+      </div>
+    </section>
 
-    <main id="content" class="wrap">
-      <p class="count" id="count" aria-live="polite">共 {{COUNT}} 个条目</p>
-      <p class="empty-state" id="empty" hidden>没有匹配的条目，试试更短的关键词。</p>
-      {{BODY}}
-    </main>
+    <div class="wrap">
+      <aside class="rail">
+        <nav aria-label="章节导航">{{NAV}}</nav>
+      </aside>
 
-    <footer class="site-footer">
-      <div class="wrap footer-inner">
-        <div class="footer-brand">
-          <svg class="footer-mark" viewBox="0 0 64 64" aria-hidden="true">
-            <rect width="64" height="64" rx="14" fill="var(--mark-bg)" />
-            <path
-              d="M17 45c11-1 19-9 23-24 3 13-1 24-11 29-5 3-10 1-12-5Z"
-              fill="var(--mark-body)"
-            />
-            <circle cx="41" cy="20" r="4.5" fill="var(--mark-eye)" />
-          </svg>
-          <span>{{TITLE}}</span>
+      <main class="content" id="main" tabindex="-1" aria-labelledby="page-title">
+        <p class="status" id="status" hidden></p>
+        <p class="sr-only" id="sr-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="empty" id="empty" hidden>
+          <p>没有匹配「<span id="empty-q"></span>」的条目</p>
+          <button class="empty-btn" id="empty-clear" type="button">清空搜索</button>
         </div>
-        <ul class="footer-meta">
-          <li><a href="{{REPO_URL}}">{{REPO}}</a></li>
-          <li>{{LICENSE}} License</li>
-          <li>{{SECTION_COUNT}} 个章节 · {{COUNT}} 个条目</li>
-          <li>内容维护在 <code>data/</code>，欢迎提交 PR</li>
-        </ul>
+        {{BODY}}
+      </main>
+    </div>
+
+    <footer class="ftr">
+      <div class="ftr-in">
+        <div>
+          <div class="ftr-brand">
+            <svg class="ftr-mark" viewBox="0 0 32 32" aria-hidden="true">
+              <rect width="32" height="32" rx="8.5" fill="var(--ink)" />
+              <path
+                d="M10.2 21.2V11l5.8 5.8L21.8 11v10.2"
+                fill="none"
+                stroke="var(--bg)"
+                stroke-width="2.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <circle cx="24.4" cy="8.6" r="2" fill="var(--accent)" />
+            </svg>
+            <span>{{TITLE}}</span>
+          </div>
+          <p class="ftr-tag">{{TAGLINE}}</p>
+          <p class="ftr-note">{{CONTRIBUTING}}</p>
+        </div>
+        <nav class="ftr-links" aria-label="相关链接">
+          <a href="{{REPO_URL}}">{{REPO}}</a>
+          <a href="{{REPO_URL}}/blob/main/LICENSE">{{LICENSE}}</a>
+        </nav>
+        <div class="ftr-meta">
+          <span>{{SECTION_COUNT}} 个章节</span>
+          <span>{{COUNT}} 个条目</span>
+          <span>内容维护在 data/</span>
+        </div>
       </div>
     </footer>
 
-    <button class="back-top" id="backTop" type="button" aria-label="回到顶部" aria-hidden="true">
-      ↑
+    <button class="back-top" id="back-top" type="button" aria-label="回到顶部" aria-hidden="true">
+      <svg
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        aria-hidden="true"
+      >
+        <path d="M8 12.5v-9M4.2 7.3 8 3.5l3.8 3.8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
     </button>
 
     <script src="./assets/app.js" defer></script>
